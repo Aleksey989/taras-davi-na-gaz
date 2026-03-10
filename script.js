@@ -46,7 +46,7 @@ function sendEmail(name, email, ticketCode, productType, productDesc, productPri
         return; 
     }
     
-    emailjs.send('default_service', 'template_nvsb1bz', templateParams)
+    emailjs.send('default_service', 'ticket_template', templateParams)
         .then(function(response) {
             console.log('Email отправлен!', response.status, response.text);
             alert('Билет отправлен на ваш email!');
