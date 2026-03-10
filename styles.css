@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --primary: #22c55e;
     --primary-dark: #16a34a;
     --secondary: #6366f1;
@@ -576,7 +576,7 @@ body::before {
     }
 }
 
-.footer-links {
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; } .footer-links a { color: #888; text-decoration: none; } .footer-links a:hover { color: #fff; } .footer-links-old {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -665,7 +665,7 @@ body::before {
         text-align: center;
     }
 
-    .footer-links {
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; } .footer-links a { color: #888; text-decoration: none; } .footer-links a:hover { color: #fff; } .footer-links-old {
         justify-content: center;
     }
 }
