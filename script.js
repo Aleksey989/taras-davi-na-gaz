@@ -31,7 +31,7 @@ function generateCode() {
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date) {
-    const templateParams = { 
+    const templateParams = { email: email, 
         name: name, 
         ticket_code: ticketCode, 
         product_type: productType, 
