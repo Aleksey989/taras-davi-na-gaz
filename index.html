@@ -1,72 +1,77 @@
-п»ї<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang=ru>
-
 <head>
     <meta charset=UTF-8>
     <meta name=viewport content=width=device-width, initial-scale=1.0>
-    <title>РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р· | Р‘РёР»РµС‚С‹ Рё СЃРµСЂС‚РёС„РёРєР°С‚С‹</title>
+    <title>ТарасДавиНаГаз | Билеты и сертификаты</title>
     <link rel=preconnect href=https://fonts.googleapis.com>
     <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
     <link href=https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap rel=stylesheet>
     <link rel=stylesheet href=styles.css>
     <script src=https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js></script>
 </head>
-
 <body>
     <header class=header>
         <div class=container>
             <div class=logo>
-
-                <span class=logo-text>РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р·</span>
+                <span class=logo-icon>??</span>
+                <span class=logo-text>ТарасДавиНаГаз</span>
             </div>
         </div>
     </header>
     <main class=main>
         <section class=hero>
             <div class=container>
-                <h1 class=hero-title>Р‘РёР»РµС‚С‹ Рё РїРѕРґР°СЂРѕС‡РЅС‹Рµ СЃРµСЂС‚РёС„РёРєР°С‚С‹</h1>
-                <p class=hero-subtitle>Р’С‹Р±РµСЂРёС‚Рµ РїРѕРґС…РѕРґСЏС‰РёР№ РІР°СЂРёР°РЅС‚ Рё РѕС„РѕСЂРјРёС‚Рµ Р·Р°РєР°Р·</p>
+                <h1 class=hero-title>Билеты и подарочные сертификаты</h1>
+                <p class=hero-subtitle>Выберите подходящий вариант и оформите заказ</p>
             </div>
         </section>
         <section class=products id=products>
             <div class=container>
                 <div class=products-grid>
                     <div class=product-card data-type=ticket>
-                        <div class=product-badge>РџРѕРїСѓР»СЏСЂРЅРѕРµ</div>
+                        <div class=product-badge>Популярно</div>
                         <div class=product-gallery>
                             <div class=gallery-main>
-                                <img src=img/photo_2026-02-06_18-24-18.jpg alt=РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р· class=gallery-img>
+                                <img src=img/photo_2026-02-06_18-24-18.jpg alt=ТарасДавиНаГаз class=gallery-img>
                             </div>
                             <div class=gallery-thumbs>
-                                <img src=img/photo_2026-02-06_18-24-21.jpg alt=Р¤РѕС‚Рѕ 1 class=thumb>
-                                <img src=img/photo_2026-02-06_18-24-29.jpg alt=Р¤РѕС‚Рѕ 2 class=thumb>
-                                <img src=img/photo_2026-02-09_11-02-08.jpg alt=Р¤РѕС‚Рѕ 3 class=thumb>
+                                <img src=img/photo_2026-02-06_18-24-21.jpg alt=Фото 1 class=thumb>
+                                <img src=img/photo_2026-02-06_18-24-29.jpg alt=Фото 2 class=thumb>
+                                <img src=img/photo_2026-02-09_11-02-08.jpg alt=Фото 3 class=thumb>
                             </div>
                         </div>
-                        <h2 class=product-title>Р‘РёР»РµС‚</h2>
-                        <p class=product-desc>Р‘РёР»РµС‚ СЃ СѓРЅРёРєР°Р»СЊРЅС‹Рј РЅРѕРјРµСЂРѕРј - РїСЂРёС…РѕРґРёС‚ РЅР° email Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё</p>
-                        <div class=product-price><span class=price-amount>1 500 в‚Ѕ</span></div>
-
-                        <button class=btn btn-primary onclick=selectProduct('ticket')>Р’С‹Р±СЂР°С‚СЊ Р±РёР»РµС‚</button>
+                        <h2 class=product-title>Билет</h2>
+                        <p class=product-desc>Получите незабываемые впечатления от поездки</p>
+                        <div class=product-price><span class=price-amount>1 500 ?</span></div>
+                        <ul class=product-features>
+                            <li>? Поездка 30 минут</li>
+                            <li>? Инструктаж включён</li>
+                            <li>? Фото и видео</li>
+                        </ul>
+                        <button class=btn btn-primary onclick=selectProduct('ticket')>Выбрать билет</button>
                     </div>
                     <div class=product-card data-type=certificate>
-                        <div class=product-badge gift>РџРѕРґР°СЂРѕРє</div>
+                        <div class=product-badge gift>Подарок</div>
                         <div class=product-gallery>
                             <div class=gallery-main>
-                                <img src=img/photo_2026-02-13_18-37-39.jpg alt=РЎРµСЂС‚РёС„РёРєР°С‚ class=gallery-img>
+                                <img src=img/photo_2026-02-13_18-37-39.jpg alt=Сертификат class=gallery-img>
                             </div>
                             <div class=gallery-thumbs>
-                                <img src=img/photo_2026-02-06_18-24-18.jpg alt=Р¤РѕС‚Рѕ 1 class=thumb>
-                                <img src=img/photo_2026-02-06_18-24-21.jpg alt=Р¤РѕС‚Рѕ 2 class=thumb>
-                                <img src=img/photo_2026-02-09_11-02-08.jpg alt=Р¤РѕС‚Рѕ 3 class=thumb>
+                                <img src=img/photo_2026-02-06_18-24-18.jpg alt=Фото 1 class=thumb>
+                                <img src=img/photo_2026-02-06_18-24-21.jpg alt=Фото 2 class=thumb>
+                                <img src=img/photo_2026-02-09_11-02-08.jpg alt=Фото 3 class=thumb>
                             </div>
                         </div>
-                        <h2 class=product-title>РџРѕРґР°СЂРѕС‡РЅС‹Р№ СЃРµСЂС‚РёС„РёРєР°С‚</h2>
-                        <p class=product-desc>РРјРµРЅРЅРѕР№ СЃРµСЂС‚РёС„РёРєР°С‚ СЃ СѓРЅРёРєР°Р»СЊРЅС‹Рј РЅРѕРјРµСЂРѕРј - РїСЂРёС…РѕРґРёС‚ РЅР° email Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё
-                        </p>
-                        <div class=product-price><span class=price-amount>3 000 в‚Ѕ</span></div>
-
-                        <button class=btn btn-primary onclick=selectProduct('certificate')>Р’С‹Р±СЂР°С‚СЊ СЃРµСЂС‚РёС„РёРєР°С‚</button>
+                        <h2 class=product-title>Подарочный сертификат</h2>
+                        <p class=product-desc>Отличный подарок для друзей и близких</p>
+                        <div class=product-price><span class=price-amount>3 000 ?</span></div>
+                        <ul class=product-features>
+                            <li>? Номинал 3000 ?</li>
+                            <li>? Действует 6 месяцев</li>
+                            <li>? Любой получатель</li>
+                        </ul>
+                        <button class=btn btn-primary onclick=selectProduct('certificate')>Выбрать сертификат</button>
                     </div>
                 </div>
             </div>
@@ -74,19 +79,18 @@
         <section class=order id=order style=display: none;>
             <div class=container>
                 <div class=order-card>
-                    <button class=back-btn onclick=goBack()>в†ђ РќР°Р·Р°Рґ</button>
-                    <h2 class=order-title>РћС„РѕСЂРјР»РµРЅРёРµ Р·Р°РєР°Р·Р°</h2>
-                    <p class=order-subtitle id=order-type-text>Р‘РёР»РµС‚</p>
+                    <button class=back-btn onclick=goBack()>< Назад</button>
+                    <h2 class=order-title>Оформление заказа</h2>
+                    <p class=order-subtitle id=order-type-text>Билет</p>
                     <form id=order-form onsubmit=submitOrder(event)>
                         <div class=form-group>
-                            <label class=form-label for=name>РРјСЏ *</label>
-                            <input type=text id=name name=name class=form-input required placeholder=Р’Р°С€Рµ РёРјСЏ>
+                            <label class=form-label for=name>Имя *</label>
+                            <input type=text id=name name=name class=form-input required placeholder=Ваше имя>
                             <span class=error-message id=name-error></span>
                         </div>
                         <div class=form-group>
-                            <label class=form-label for=phone>РўРµР»РµС„РѕРЅ *</label>
-                            <input type=tel id=phone name=phone class=form-input required placeholder=+7 (999)
-                                123-45-67>
+                            <label class=form-label for=phone>Телефон *</label>
+                            <input type=tel id=phone name=phone class=form-input required placeholder=+7 (999) 123-45-67>
                             <span class=error-message id=phone-error></span>
                         </div>
                         <div class=form-group>
@@ -95,38 +99,33 @@
                             <span class=error-message id=email-error></span>
                         </div>
                         <div class=form-group id=recipient-group style=display: none;>
-                            <label class=form-label for=recipient-name>РРјСЏ РїРѕР»СѓС‡Р°С‚РµР»СЏ</label>
-                            <input type=text id=recipient-name name=recipient-name class=form-input placeholder=Р”Р»СЏ РєРѕРіРѕ
-                                СЃРµСЂС‚РёС„РёРєР°С‚>
+                            <label class=form-label for=recipient-name>Имя получателя</label>
+                            <input type=text id=recipient-name name=recipient-name class=form-input placeholder=Для кого сертификат>
                         </div>
                         <div class=form-group>
-                            <label class=form-label for=comment>РљРѕРјРјРµРЅС‚Р°СЂРёР№</label>
+                            <label class=form-label for=comment>Комментарий</label>
                             <textarea id=comment name=comment class=form-input form-textarea></textarea>
                         </div>
                         <div class=agreements>
-                            <div class=agreements-title>РћР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ СЃРѕРіР»Р°СЃРёСЏ *</div>
+                            <div class=agreements-title>Обязательные согласия *</div>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-offer class=agreement-checkbox required>
-                                <span class=agreement-text>РЇ СЃРѕРіР»Р°СЃРµРЅ СЃ <a href=docs/oferta.html target=_blank>Р”РѕРіРѕРІРѕСЂРѕРј
-                                        РѕС„РµСЂС‚С‹</a> *</span>
+                                <span class=agreement-text>Я согласен с <a href=docs/oferta.html target=_blank>Договором оферты</a> *</span>
                             </label>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-privacy class=agreement-checkbox required>
-                                <span class=agreement-text>РЇ СЃРѕРіР»Р°СЃРµРЅ СЃ <a href=docs/privacy.html
-                                        target=_blank>РџРѕР»РёС‚РёРєРѕР№ РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚Рё</a> *</span>
+                                <span class=agreement-text>Я согласен с <a href=docs/privacy.html target=_blank>Политикой конфиденциальности</a> *</span>
                             </label>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-rules class=agreement-checkbox required>
-                                <span class=agreement-text>РЇ РѕР·РЅР°РєРѕРјР»РµРЅ СЃ <a href=docs/rules.html
-                                        target=_blank>РџСЂР°РІРёР»Р°РјРё СѓС‡Р°СЃС‚РёСЏ</a> *</span>
+                                <span class=agreement-text>Я ознакомлен с <a href=docs/rules.html target=_blank>Правилами участия</a> *</span>
                             </label>
                         </div>
                         <div class=order-summary>
-                            <div class=summary-row><span>РўРѕРІР°СЂ:</span><span id=summary-product>Р‘РёР»РµС‚</span></div>
-                            <div class=summary-row total><span>Рљ РѕРїР»Р°С‚Рµ:</span><span id=summary-price>1 500 в‚Ѕ</span>
-                            </div>
+                            <div class=summary-row><span>Товар:</span><span id=summary-product>Билет</span></div>
+                            <div class=summary-row total><span>К оплате:</span><span id=summary-price>1 500 ?</span></div>
                         </div>
-                        <button type=submit class=btn btn-submit>РћС„РѕСЂРјРёС‚СЊ Р·Р°РєР°Р·</button>
+                        <button type=submit class=btn btn-submit>Оформить заказ</button>
                     </form>
                 </div>
             </div>
@@ -135,21 +134,21 @@
             <div class=container>
                 <div class=ticket-card>
                     <div class=ticket-header>
-                        <div class=ticket-logo>рџљ— РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р·</div>
-                        <div class=ticket-type id=ticket-type>Р‘РёР»РµС‚</div>
+                        <div class=ticket-logo>?? ТарасДавиНаГаз</div>
+                        <div class=ticket-type id=ticket-type>Билет</div>
                     </div>
                     <div class=ticket-code-box>
-                        <div class=ticket-code-label>Р’Р°С€ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РєРѕРґ:</div>
+                        <div class=ticket-code-label>Ваш уникальный код:</div>
                         <div class=ticket-code id=ticket-code>TDNG-ABCD-1234</div>
                     </div>
                     <div class=ticket-details>
-                        <div class=ticket-row><span>РЈСЃР»СѓРіР°:</span><span id=ticket-desc>РџРѕРµР·РґРєР° 30 РјРёРЅСѓС‚</span></div>
-                        <div class=ticket-row><span>РЎС‚РѕРёРјРѕСЃС‚СЊ:</span><span id=ticket-price>1 500 в‚Ѕ</span></div>
-                        <div class=ticket-row><span>РРјСЏ:</span><span id=ticket-name>РРІР°РЅ</span></div>
-                        <div class=ticket-row><span>Р”Р°С‚Р°:</span><span id=ticket-date>10.03.2026</span></div>
+                        <div class=ticket-row><span>Услуга:</span><span id=ticket-desc>Поездка 30 минут</span></div>
+                        <div class=ticket-row><span>Стоимость:</span><span id=ticket-price>1 500 ?</span></div>
+                        <div class=ticket-row><span>Имя:</span><span id=ticket-name>Иван</span></div>
+                        <div class=ticket-row><span>Дата:</span><span id=ticket-date>10.03.2026</span></div>
                     </div>
-                    <div class=ticket-note>рџ“§ Р‘РёР»РµС‚ РѕС‚РїСЂР°РІР»РµРЅ РЅР° email</div>
-                    <button class=btn btn-primary onclick=resetForm()>РќР° РіР»Р°РІРЅСѓСЋ</button>
+                    <div class=ticket-note>?? Билет отправлен на email</div>
+                    <button class=btn btn-primary onclick=resetForm()>На главную</button>
                 </div>
             </div>
         </section>
@@ -157,23 +156,17 @@
     <footer class=footer>
         <div class=container>
             <div class=footer-content>
-                <div class=footer-logo>РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р·</div>
+                <div class=footer-logo>ТарасДавиНаГаз</div>
                 <div class=footer-links>
-                    <a href=# class=footer-link>Рћ РЅР°СЃ</a>
-                    <a href=# class=footer-link>РљРѕРЅС‚Р°РєС‚С‹</a>
-                    <a href=docs/oferta.html class=footer-link>РћС„РµСЂС‚Р°</a>
-                    <a href=docs/privacy.html class=footer-link>РџРѕР»РёС‚РёРєР°</a>
+                    <a href=# class=footer-link>О нас</a>
+                    <a href=# class=footer-link>Контакты</a>
+                    <a href=docs/oferta.html class=footer-link>Оферта</a>
+                    <a href=docs/privacy.html class=footer-link>Политика</a>
                 </div>
-                <div class=footer-copyright>В© 2026 РўР°СЂР°СЃР”Р°РІРёРќР°Р“Р°Р·</div>
+                <div class=footer-copyright>© 2026 ТарасДавиНаГаз</div>
             </div>
         </div>
     </footer>
     <script src=script.js></script>
-
-    {{email}}
-
-    РџСЂРёРІРµС‚, {{name}}! рџЋ‰
-    ...
-</body>
-
+<script>emailjs.init('ub7ek0pZy8Qf-F1Y-');</script></body>
 </html>

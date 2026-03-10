@@ -5,8 +5,6 @@
 
 let currentProduct = null;
 
-(function() { if (typeof emailjs !== 'undefined') { emailjs.init('ub7ek0pZy8Qf-F1Y-'); } })();
-
 function selectProduct(type) {
     currentProduct = type;
     document.getElementById('products').style.display = 'none';
@@ -33,17 +31,29 @@ function generateCode() {
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date) {
-    if (typeof emailjs === 'undefined') { console.log('EmailJS не загружен'); return Promise.resolve({ status: 200 }); }
-    return emailjs.send('default_service', 'template_nvsb1bz', { 
+    const templateParams = { 
         name: name, 
-        email: email,
         ticket_code: ticketCode, 
         product_type: productType, 
         product_desc: productDesc, 
         product_price: productPrice, 
         date: date 
-    })
-        .then(r => console.log('Email отправлен!', r.status), e => console.log('Ошибка:', e));
+    };
+    
+    if (typeof emailjs === 'undefined') { 
+        console.log('EmailJS не загружен'); 
+        alert('EmailJS не загружен. Проверьте подключение к интернету.');
+        return; 
+    }
+    
+    emailjs.send('default_service', 'template_nvsb1bz', templateParams)
+        .then(function(response) {
+            console.log('Email отправлен!', response.status, response.text);
+            alert('Билет отправлен на ваш email!');
+        }, function(error) {
+            console.log('Ошибка:', error);
+            alert('Ошибка отправки: ' + error.text);
+        });
 }
 
 function submitOrder(e) {
