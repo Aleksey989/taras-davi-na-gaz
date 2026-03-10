@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang=ru>
+
 <head>
     <meta charset=UTF-8>
     <meta name=viewport content=width=device-width, initial-scale=1.0>
@@ -10,6 +11,7 @@
     <link rel=stylesheet href=styles.css>
     <script src=https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js></script>
 </head>
+
 <body>
     <header class=header>
         <div class=container>
@@ -30,7 +32,7 @@
             <div class=container>
                 <div class=products-grid>
                     <div class=product-card data-type=ticket>
-                        <div class=product-badge>Популярно</div>
+                        <div class=product-badge>Популярное</div>
                         <div class=product-gallery>
                             <div class=gallery-main>
                                 <img src=img/photo_2026-02-06_18-24-18.jpg alt=ТарасДавиНаГаз class=gallery-img>
@@ -42,13 +44,9 @@
                             </div>
                         </div>
                         <h2 class=product-title>Билет</h2>
-                        <p class=product-desc>Получите незабываемые впечатления от поездки</p>
+                        <p class=product-desc>Билет с уникальным номером - приходит на email автоматически</p>
                         <div class=product-price><span class=price-amount>1 500 ₽</span></div>
-                        <ul class=product-features>
-                            <li>✓ Поездка 30 минут</li>
-                            <li>✓ Инструктаж включён</li>
-                            <li>✓ Фото и видео</li>
-                        </ul>
+
                         <button class=btn btn-primary onclick=selectProduct('ticket')>Выбрать билет</button>
                     </div>
                     <div class=product-card data-type=certificate>
@@ -64,13 +62,10 @@
                             </div>
                         </div>
                         <h2 class=product-title>Подарочный сертификат</h2>
-                        <p class=product-desc>Отличный подарок для друзей и близких</p>
+                        <p class=product-desc>Именной сертификат с уникальным номером - приходит на email автоматически
+                        </p>
                         <div class=product-price><span class=price-amount>3 000 ₽</span></div>
-                        <ul class=product-features>
-                            <li>✓ Номинал 3000 ₽</li>
-                            <li>✓ Действует 6 месяцев</li>
-                            <li>✓ Любой получатель</li>
-                        </ul>
+
                         <button class=btn btn-primary onclick=selectProduct('certificate')>Выбрать сертификат</button>
                     </div>
                 </div>
@@ -90,7 +85,8 @@
                         </div>
                         <div class=form-group>
                             <label class=form-label for=phone>Телефон *</label>
-                            <input type=tel id=phone name=phone class=form-input required placeholder=+7 (999) 123-45-67>
+                            <input type=tel id=phone name=phone class=form-input required placeholder=+7 (999)
+                                123-45-67>
                             <span class=error-message id=phone-error></span>
                         </div>
                         <div class=form-group>
@@ -100,7 +96,8 @@
                         </div>
                         <div class=form-group id=recipient-group style=display: none;>
                             <label class=form-label for=recipient-name>Имя получателя</label>
-                            <input type=text id=recipient-name name=recipient-name class=form-input placeholder=Для кого сертификат>
+                            <input type=text id=recipient-name name=recipient-name class=form-input placeholder=Для кого
+                                сертификат>
                         </div>
                         <div class=form-group>
                             <label class=form-label for=comment>Комментарий</label>
@@ -110,20 +107,24 @@
                             <div class=agreements-title>Обязательные согласия *</div>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-offer class=agreement-checkbox required>
-                                <span class=agreement-text>Я согласен с <a href=docs/oferta.html target=_blank>Договором оферты</a> *</span>
+                                <span class=agreement-text>Я согласен с <a href=docs/oferta.html target=_blank>Договором
+                                        оферты</a> *</span>
                             </label>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-privacy class=agreement-checkbox required>
-                                <span class=agreement-text>Я согласен с <a href=docs/privacy.html target=_blank>Политикой конфиденциальности</a> *</span>
+                                <span class=agreement-text>Я согласен с <a href=docs/privacy.html
+                                        target=_blank>Политикой конфиденциальности</a> *</span>
                             </label>
                             <label class=agreement-item>
                                 <input type=checkbox id=agree-rules class=agreement-checkbox required>
-                                <span class=agreement-text>Я ознакомлен с <a href=docs/rules.html target=_blank>Правилами участия</a> *</span>
+                                <span class=agreement-text>Я ознакомлен с <a href=docs/rules.html
+                                        target=_blank>Правилами участия</a> *</span>
                             </label>
                         </div>
                         <div class=order-summary>
                             <div class=summary-row><span>Товар:</span><span id=summary-product>Билет</span></div>
-                            <div class=summary-row total><span>К оплате:</span><span id=summary-price>1 500 ₽</span></div>
+                            <div class=summary-row total><span>К оплате:</span><span id=summary-price>1 500 ₽</span>
+                            </div>
                         </div>
                         <button type=submit class=btn btn-submit>Оформить заказ</button>
                     </form>
@@ -169,4 +170,5 @@
     </footer>
     <script src=script.js></script>
 </body>
+
 </html>
