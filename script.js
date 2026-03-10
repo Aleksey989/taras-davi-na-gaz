@@ -2,19 +2,18 @@
     ticket: {
         name: 'Билет',
         price: '1 500 ₽',
-        priceValue: 1500,
-        desc: 'Поездка 30 минут'
+        priceValue: 1500
     },
     certificate: {
         name: 'Подарочный сертификат',
         price: '3 000 ₽',
-        priceValue: 3000,
-        desc: 'Номинал 3000 ₽'
+        priceValue: 3000
     }
 };
 
 let currentProduct = null;
 
+// Инициализация галереи
 document.addEventListener('DOMContentLoaded', function() {
     initGallery();
 });
@@ -29,33 +28,21 @@ function initGallery() {
         if (thumbs.length > 0 && mainImg) {
             thumbs.forEach((thumb, index) => {
                 thumb.addEventListener('click', function() {
+                    // Убираем активный класс у всех миниатюр
                     thumbs.forEach(t => t.classList.remove('active'));
+                    // Добавляем активный класс текущей
                     this.classList.add('active');
+                    // Меняем главное изображение
                     mainImg.src = this.src;
                 });
                 
+                // Первую миниатюру делаем активной
                 if (index === 0) {
                     thumb.classList.add('active');
                 }
             });
         }
     });
-}
-
-function generateTicketCode() {
-    const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    let code = 'TDNG-';
-    
-    for (let i = 0; i < 4; i++) {
-        code += letters.charAt(Math.floor(Math.random() * letters.length));
-    }
-    code += '-';
-    for (let i = 0; i < 4; i++) {
-        code += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    }
-    
-    return code;
 }
 
 function selectProduct(type) {
@@ -149,6 +136,12 @@ function clearErrors() {
     errors.forEach(error => error.textContent = '');
 }
 
+function generateOrderId() {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return TDNG--;
+}
+
 function submitOrder(event) {
     event.preventDefault();
     
@@ -159,10 +152,8 @@ function submitOrder(event) {
     const form = document.getElementById('order-form');
     const formData = new FormData(form);
     
-    const ticketCode = generateTicketCode();
-    
     const orderData = {
-        id: ticketCode,
+        id: generateOrderId(),
         product: products[currentProduct],
         customer: {
             name: formData.get('name'),
@@ -176,23 +167,15 @@ function submitOrder(event) {
     
     console.log('Заказ оформлен:', orderData);
     
-    // Заполняем данные билета
-    document.getElementById('ticket-code').textContent = ticketCode;
-    document.getElementById('ticket-type').textContent = products[currentProduct].name;
-    document.getElementById('ticket-desc').textContent = products[currentProduct].desc;
-    document.getElementById('ticket-price').textContent = products[currentProduct].price;
-    document.getElementById('ticket-name').textContent = formData.get('name');
-    document.getElementById('ticket-date').textContent = new Date().toLocaleDateString('ru-RU');
+    document.getElementById('order-id').textContent = orderData.id;
     
     document.getElementById('order').style.display = 'none';
-    document.getElementById('success').style.display = 'none';
-    document.getElementById('ticket').style.display = 'block';
+    document.getElementById('success').style.display = 'block';
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function resetForm() {
-    document.getElementById('ticket').style.display = 'none';
     document.getElementById('success').style.display = 'none';
     document.getElementById('products').style.display = 'block';
     document.getElementById('order-form').reset();
