@@ -166,6 +166,49 @@
             </div>
         </section>
 
+        <!-- Билет -->
+        <section class="ticket-section" id="ticket" style="display: none;">
+            <div class="container">
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <div class="ticket-logo">🚗 ТарасДавиНаГаз</div>
+                        <div class="ticket-type" id="ticket-type">Билет</div>
+                    </div>
+                    
+                    <div class="ticket-code-box">
+                        <div class="ticket-code-label">Ваш уникальный код:</div>
+                        <div class="ticket-code" id="ticket-code">TDNG-ABCD-1234</div>
+                    </div>
+                    
+                    <div class="ticket-details">
+                        <div class="ticket-row">
+                            <span>Услуга:</span>
+                            <span id="ticket-desc">Поездка 30 минут</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span>Стоимость:</span>
+                            <span id="ticket-price">1 500 ₽</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span>Имя:</span>
+                            <span id="ticket-name">Иван</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span>Дата покупки:</span>
+                            <span id="ticket-date">10.03.2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ticket-note">
+                        📧 Билет отправлен на ваш email<br>
+                        💾 Сохраните этот код для посещения
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="resetForm()">Вернуться на главную</button>
+                </div>
+            </div>
+        </section>
+
         <section class="success" id="success" style="display: none;">
             <div class="container">
                 <div class="success-card">
