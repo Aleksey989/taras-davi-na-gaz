@@ -1,6 +1,6 @@
 ﻿const products = {
-    ticket: { name: 'Билет', price: 1500, desc: 'Поездка 30 минут' },
-    certificate: { name: 'Подарочный сертификат', price: 3000, desc: 'Номинал 3000 ₽' }
+    ticket: { name: 'Билет', price: 1500, desc: 'Поездка 30 минут', image: 'https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-06_18-24-18.jpg' },
+    certificate: { name: 'Подарочный сертификат', price: 3000, desc: 'Номинал 3000 ₽', image: 'https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-13_18-37-39.jpg' }
 };
 
 let currentProduct = 'ticket';
@@ -23,7 +23,7 @@ function generateCode() {
     return code;
 }
 
-function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date) {
+function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date, imageUrl) {
     const templateParams = { 
         email: email,
         name: name, 
@@ -31,7 +31,8 @@ function sendEmail(name, email, ticketCode, productType, productDesc, productPri
         product_type: productType, 
         product_desc: productDesc, 
         product_price: productPrice, 
-        date: date 
+        date: date,
+        image_url: imageUrl
     };
     
     emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams)
@@ -78,7 +79,7 @@ function submitOrder(e) {
     document.getElementById('order').style.display = 'none';
     document.getElementById('ticket').style.display = 'block';
     
-    sendEmail(name, email, ticketCode, product.name, product.desc, product.price + ' ₽', date);
+    sendEmail(name, email, ticketCode, product.name, product.desc, product.price + ' ₽', date, product.image);
 }
 
 function resetForm() {
