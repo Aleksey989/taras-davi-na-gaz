@@ -34,7 +34,15 @@ function generateCode() {
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date) {
     if (typeof emailjs === 'undefined') { console.log('EmailJS не загружен'); return Promise.resolve({ status: 200 }); }
-    return emailjs.send('default_service', 'template_nvsb1bz', { name: name, ticket_code: ticketCode, product_type: productType, product_desc: productDesc, product_price: productPrice, date: date })
+    return emailjs.send('default_service', 'template_nvsb1bz', { 
+        name: name, 
+        email: email,
+        ticket_code: ticketCode, 
+        product_type: productType, 
+        product_desc: productDesc, 
+        product_price: productPrice, 
+        date: date 
+    })
         .then(r => console.log('Email отправлен!', r.status), e => console.log('Ошибка:', e));
 }
 
