@@ -1,6 +1,16 @@
 ﻿var products = {
-  ticket: { name: "Билет", price: 1500, desc: "Поездка 30 минут" },
-  certificate: { name: "Подарочный сертификат", price: 3000, desc: "Именной сертификат" }
+  ticket: { 
+    name: "Билет", 
+    price: 1500, 
+    desc: "Поездка 30 минут",
+    image: "https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-06_18-24-18.jpg"
+  },
+  certificate: { 
+    name: "Подарочный сертификат", 
+    price: 3000, 
+    desc: "Именной сертификат",
+    image: "https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-13_18-37-39.jpg"
+  }
 };
 
 // Инициализация EmailJS
@@ -89,7 +99,7 @@ function submitOrder(e) {
   console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email, product: product.name, price: product.price + " ₽" });
   
   // Отправить email
-  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc);
+  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc, product.image);
   
   // Показать успех
   document.getElementById("order-id").textContent = orderId;
@@ -107,20 +117,24 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function sendEmail(orderId, name, email, product, price, productDesc) {
+function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) {
   if (typeof emailjs === 'undefined') {
     console.log('EmailJS не загружен');
     return;
   }
   
   var templateParams = {
-    name: name,
+    to_name: name,
+    to_email: email,
     ticket_code: orderId,
     product_type: product,
     product_desc: productDesc,
     product_price: price,
-    date: new Date().toLocaleDateString('ru-RU')
+    date: new Date().toLocaleDateString('ru-RU'),
+    image_url: imageUrl
   };
+  
+  console.log('Отправка email с параметрами:', templateParams);
   
   emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams)
     .then(function(response) {
