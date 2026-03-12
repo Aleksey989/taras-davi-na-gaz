@@ -77,8 +77,7 @@ function submitOrder(e) {
   
   console.log("Отправка...");
   
-  // Новый service ID
-  emailjs.send('service_0plmfib', 'template_nvsb1bz', params)
+  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
