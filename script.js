@@ -116,6 +116,7 @@ function resetForm() {
 function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) {
   console.log("=== ОТПРАВКА EMAIL ===");
   console.log("emailjs определён?", typeof emailjs !== 'undefined');
+  console.log("version:", emailjs?.version);
   
   if (typeof emailjs === 'undefined') {
     alert('Ошибка: EmailJS не загружен');
@@ -124,7 +125,6 @@ function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) 
   
   var templateParams = {
     to_name: name,
-    to_email: email,
     ticket_code: orderId,
     product_type: product,
     product_desc: productDesc,
@@ -133,14 +133,14 @@ function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) 
     image_url: imageUrl
   };
   
-  console.log("Параметры:", templateParams);
+  console.log("Параметры:", JSON.stringify(templateParams));
   
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams)
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", templateParams)
     .then(function(response) {
       console.log('УСПЕХ! Email отправлен', response.status, response.text);
       alert('Билет отправлен на email!');
     }, function(error) {
       console.log('ОШИБКА отправки email:', error);
-      alert('Ошибка отправки email: ' + JSON.stringify(error));
+      alert('Ошибка отправки: ' + error.text);
     });
 }
