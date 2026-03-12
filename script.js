@@ -5,8 +5,11 @@
 
 var currentProduct = null;
 
-// Инициализация
-emailjs.init("ub7ek0pZy8Qf-F1Y-");
+// Инициализация с явным publicKey
+emailjs.init({
+  publicKey: "ub7ek0pZy8Qf-F1Y-",
+  limitRate: { id: "taras-davi-na-gaz" }
+});
 
 function selectProduct(type) {
   currentProduct = type;
@@ -72,15 +75,18 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка...");
+  console.log("Отправка...", params);
   
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
+  // Пробуем с 4 параметрами
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params, {
+    to_email: email
+  })
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error);
-      alert('Ошибка: ' + error.text);
+      alert('Ошибка: ' + (error.text || error.message || 'проверьте настройки'));
     });
   
   document.getElementById("order-id").textContent = orderId;
