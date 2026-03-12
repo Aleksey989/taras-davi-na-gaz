@@ -5,7 +5,6 @@
 
 let currentProduct = 'ticket';
 
-// Google Apps Script URL
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzV4mimX1T-Vy2nOWpZJEVeXWoy6eRkzUm7FYElEh9Pom0-YkVFC9cueMdTuj4rlon6/exec';
 
 function selectProduct(type) {
@@ -27,15 +26,21 @@ function generateCode() {
 }
 
 function saveToGoogleSheet(data) {
+    console.log('Отправка в таблицу:', data);
+    
+    const json = JSON.stringify(data);
+    const blob = new Blob([json], {type: 'application/json'});
+    
     fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    }).then(() => {
-        console.log('Данные сохранены в таблицу');
-    }).catch(err => {
-        console.log('Ошибка сохранения в таблицу:', err);
+        body: blob
+    })
+    .then(response => response.text())
+    .then(result => {
+        console.log('Ответ таблицы:', result);
+    })
+    .catch(err => {
+        console.error('Ошибка:', err);
     });
 }
 
@@ -84,7 +89,6 @@ function submitOrder(e) {
     const product = products[currentProduct];
     const date = new Date().toLocaleDateString('ru-RU');
     
-    // Сохраняем в Google Таблицу
     saveToGoogleSheet({
         name: name,
         phone: phone,
