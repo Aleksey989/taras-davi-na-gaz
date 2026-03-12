@@ -28,10 +28,17 @@ function generateCode() {
 function saveToGoogleSheet(data) {
     console.log('Отправка в таблицу:', data);
     
-    var params = 'json=' + encodeURIComponent(JSON.stringify(data));
+    // Формируем URL с параметрами
+    var url = GOOGLE_SHEET_URL + 
+        '?name=' + encodeURIComponent(data.name) +
+        '&phone=' + encodeURIComponent(data.phone) +
+        '&email=' + encodeURIComponent(data.email) +
+        '&product=' + encodeURIComponent(data.product) +
+        '&ticketCode=' + encodeURIComponent(data.ticketCode) +
+        '&price=' + encodeURIComponent(data.price);
     
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', GOOGLE_SHEET_URL + '?' + params, true);
+    xhr.open('GET', url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             console.log('Ответ таблицы:', xhr.responseText);
