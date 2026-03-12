@@ -13,11 +13,6 @@
   }
 };
 
-// Инициализация EmailJS
-if (typeof emailjs !== 'undefined') {
-  emailjs.init("ub7ek0pZy8Qf-F1Y-");
-}
-
 var currentProduct = null;
 
 function selectProduct(type) {
@@ -96,6 +91,7 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
+  console.log("=== ОФОРМЛЕНИЕ ЗАКАЗА ===");
   console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email, product: product.name, price: product.price + " ₽" });
   
   // Отправить email
@@ -118,8 +114,11 @@ function resetForm() {
 }
 
 function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) {
+  console.log("=== ОТПРАВКА EMAIL ===");
+  console.log("emailjs определён?", typeof emailjs !== 'undefined');
+  
   if (typeof emailjs === 'undefined') {
-    console.log('EmailJS не загружен');
+    alert('Ошибка: EmailJS не загружен');
     return;
   }
   
@@ -134,12 +133,14 @@ function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) 
     image_url: imageUrl
   };
   
-  console.log('Отправка email с параметрами:', templateParams);
+  console.log("Параметры:", templateParams);
   
   emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams)
     .then(function(response) {
-      console.log('Email отправлен!', response.status, response.text);
+      console.log('УСПЕХ! Email отправлен', response.status, response.text);
+      alert('Билет отправлен на email!');
     }, function(error) {
-      console.log('Ошибка отправки email:', error);
+      console.log('ОШИБКА отправки email:', error);
+      alert('Ошибка отправки email: ' + JSON.stringify(error));
     });
 }
