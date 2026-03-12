@@ -1,6 +1,4 @@
 ﻿var PUBLIC_KEY = "ub7ek0pZy8Qf-F1Y-";
-var SERVICE_ID = "service_uv8o5xb";
-var TEMPLATE_ID = "template_nvsb1bz";
 
 var products = {
   ticket: { name: "Билет", price: 1500, desc: "Поездка 30 минут" },
@@ -69,25 +67,25 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // ОТПРАВКА EMAIL
-  var serviceId = "service_uv8o5xb";
-  var templateId = "template_nvsb1bz";
-  console.log("SERVICE:", serviceId, "TEMPLATE:", templateId);
+  // ОТПРАВКА - прямо здесь
+  console.log("=== ОТПРАВКА ===");
+  var s = "service_uv8o5xb";
+  var t = "template_nvsb1bz";
+  console.log("service:", s, "template:", t);
   
-  emailjs.send(serviceId, templateId, {})
+  emailjs.send(s, t, {})
     .then(function(response) {
-      console.log('УСПЕХ!', response);
-      alert('Билет отправлен!');
+      console.log('OK!', response);
+      alert('Отправлено!');
     }, function(error) {
-      console.log('ОШИБКА:', error.status, error.text);
-      alert('Ошибка ' + error.status);
+      console.log('ERR:', error.status, error.text);
+      alert('Ошибка: ' + error.status);
     });
   
   document.getElementById("order-id").textContent = orderId;
   document.getElementById("products").style.display = "none";
   document.getElementById("order").style.display = "none";
   document.getElementById("success").style.display = "block";
-  document.getElementById("success").scrollIntoView({ behavior: "smooth" });
 }
 
 function resetForm() {
@@ -95,5 +93,4 @@ function resetForm() {
   document.getElementById("products").style.display = "block";
   document.getElementById("order-form").reset();
   currentProduct = null;
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
