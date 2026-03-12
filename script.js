@@ -62,11 +62,9 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Параметры
   var params = {
     name: name,
     phone: phone,
-    to_email: email,
     ticket_code: orderId,
     product: product.name,
     desc: product.desc,
@@ -74,9 +72,14 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка на:", email);
+  // Используем 4-й параметр для получателя
+  var options = {
+    to: email
+  };
   
-  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
+  console.log("Отправка на:", email, "опции:", options);
+  
+  emailjs.send('service_0plmfib', 'template_jxpfv4v', params, options)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
