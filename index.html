@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 <header class="header">
@@ -176,14 +175,11 @@ onclick="event.preventDefault()">Правилами участия в мероп
 </div>
 </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-window.onload = function() {
-  console.log('emailjs:', typeof emailjs);
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init("ub7ek0pZy8Qf-F1Y-");
-    console.log('EmailJS инициализирован');
-  }
-};
+var PUBLIC_KEY = "ub7ek0pZy8Qf-F1Y-";
+var SERVICE_ID = "service_uv8o5xb";
+var TEMPLATE_ID = "template_nvsb1bz";
 </script>
 <script src="script.js"></script>
 </body>

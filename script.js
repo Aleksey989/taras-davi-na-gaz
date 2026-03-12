@@ -15,6 +15,26 @@
 
 var currentProduct = null;
 
+// Инициализация EmailJS
+function initEmailJS() {
+  if (typeof emailjs !== 'undefined') {
+    try {
+      emailjs.init({
+        publicKey: PUBLIC_KEY,
+        limitRate: true
+      });
+      console.log('EmailJS инициализирован');
+    } catch(e) {
+      console.log('Ошибка инициализации:', e);
+    }
+  } else {
+    console.log('emailjs не загружен');
+  }
+}
+
+// Инициализируем сразу после загрузки скрипта
+initEmailJS();
+
 function selectProduct(type) {
   currentProduct = type;
   document.getElementById("order-type-text").textContent = products[type].name;
@@ -59,7 +79,6 @@ function submitOrder(e) {
   var name = document.getElementById("name").value.trim();
   var phone = document.getElementById("phone").value.trim();
   var email = document.getElementById("email").value.trim();
-  var comment = document.getElementById("comment").value.trim();
   
   var valid = true;
   clearErrors();
@@ -92,10 +111,10 @@ function submitOrder(e) {
   var product = products[currentProduct];
   
   console.log("=== ОФОРМЛЕНИЕ ЗАКАЗА ===");
-  console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email, product: product.name, price: product.price + " ₽" });
+  console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email });
   
   // Отправить email
-  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc, product.image);
+  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc);
   
   // Показать успех
   document.getElementById("order-id").textContent = orderId;
@@ -113,7 +132,7 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) {
+function sendEmail(orderId, name, email, product, price, productDesc) {
   console.log("=== ОТПРАВКА EMAIL ===");
   
   if (typeof emailjs === 'undefined') {
@@ -121,7 +140,6 @@ function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) 
     return;
   }
   
-  // Используем простой формат - только необходимые параметры
   var params = {
     name: name,
     ticket_code: orderId,
@@ -131,27 +149,15 @@ function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) 
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка с параметрами:", params);
+  console.log("Параметры:", params);
+  console.log("SERVICE:", SERVICE_ID, "TEMPLATE:", TEMPLATE_ID);
   
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params)
+  emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
     .then(function(response) {
       console.log('УСПЕХ!', response);
       alert('Билет отправлен на email!');
     }, function(error) {
       console.log('ОШИБКА:', error);
-      // Попробуем без картинки - может в этом проблема
-      if (imageUrl && error.status === 422) {
-        console.log('Пробуем без картинки...');
-        emailjs.send("service_uv8o5xb", "template_nvsb1bz", {
-          name: name,
-          ticket_code: orderId,
-          product_type: product,
-          product_desc: productDesc,
-          product_price: price,
-          date: new Date().toLocaleDateString('ru-RU')
-        }).then(function() {
-          alert('Билет отправлен!');
-        });
-      }
+      alert('Ошибка: ' + error.text);
     });
 }
