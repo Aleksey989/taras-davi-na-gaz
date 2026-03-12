@@ -10,7 +10,7 @@ var currentProduct = null;
 function initEmailJS() {
   if (typeof emailjs !== 'undefined') {
     emailjs.init({ publicKey: PUBLIC_KEY, limitRate: true });
-    console.log('EmailJS инициализирован');
+    console.log('EmailJS OK');
   }
 }
 initEmailJS();
@@ -67,19 +67,25 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // ОТПРАВКА - прямо здесь
+  // Отправка с параметрами
   console.log("=== ОТПРАВКА ===");
-  var s = "service_uv8o5xb";
-  var t = "template_nvsb1bz";
-  console.log("service:", s, "template:", t);
+  var params = {
+    name: name,
+    ticket_code: orderId,
+    product_type: product.name,
+    product_desc: product.desc,
+    product_price: product.price + " ₽",
+    date: new Date().toLocaleDateString('ru-RU')
+  };
+  console.log("params:", JSON.stringify(params));
   
-  emailjs.send(s, t, {})
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Отправлено!');
+      alert('Билет отправлен!');
     }, function(error) {
       console.log('ERR:', error.status, error.text);
-      alert('Ошибка: ' + error.status);
+      alert('Ошибка ' + error.status + ': ' + error.text);
     });
   
   document.getElementById("order-id").textContent = orderId;
