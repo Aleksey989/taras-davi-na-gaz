@@ -6,6 +6,38 @@
     <meta name=viewport content=width=device-width, initial-scale=1.0>
     <title>ТарасДавиНаГаз</title>
     <link rel=stylesheet href=styles.css>
+    <style>
+        .footer {
+            padding: 24px 0;
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-link:hover {
+            color: #4caf50;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
     <script src=https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js></script>
 </head>
 
@@ -49,7 +81,7 @@
                         <h2 class=product-title>Подарочный сертификат</h2>
                         <p class=product-desc>Именной сертификат</p>
                         <div class=product-price><span class=price-amount>3 000 ₽</span></div>
-                        <button class=btn btn-primary onclick=selectProduct('certificate')>Выбрать сертификат</button>
+                        <button class=btn btn-primary onclick="selectProduct('certificate')">Выбрать сертификат</button>
                     </div>
                 </div>
             </div>
@@ -131,12 +163,15 @@
             </div>
         </section>
     </main>
-    <footer class=footer>
-        <div class=container>
-            <div class=footer-content>
-                <div class=footer-logo>ТарасДавиНаГаз</div>
-                <div class=footer-copyright>2026 ТарасДавиНаГаз</div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" class="footer-link">О нас</a>
+                <a href="#" class="footer-link">Контакты</a>
+                <a href="docs/oferta.html" class="footer-link" target="_blank">Оферта</a>
+                <a href="docs/privacy.html" class="footer-link" target="_blank">Политика конфиденциальности</a>
             </div>
+            <p class="footer-copyright">2026 ТарасДавиНаГаз. Все права защищены.</p>
         </div>
     </footer>
     <script>if (typeof emailjs !== 'undefined') { emailjs.init('ub7ek0pZy8Qf-F1Y-'); }</script>
