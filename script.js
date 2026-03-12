@@ -3,6 +3,11 @@
   certificate: { name: "Подарочный сертификат", price: 3000, desc: "Именной сертификат" }
 };
 
+// Инициализация EmailJS
+if (typeof emailjs !== 'undefined') {
+  emailjs.init("ub7ek0pZy8Qf-F1Y-");
+}
+
 var currentProduct = null;
 
 function selectProduct(type) {
@@ -67,7 +72,6 @@ function submitOrder(e) {
     valid = false;
   }
   
-  // Проверка чекбоксов
   var agreeOffer = document.getElementById("agree-offer").checked;
   var agreePrivacy = document.getElementById("agree-privacy").checked;
   var agreeRules = document.getElementById("agree-rules").checked;
@@ -84,6 +88,9 @@ function submitOrder(e) {
   
   console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email, product: product.name, price: product.price + " ₽" });
   
+  // Отправить email
+  sendEmail(orderId, name, email, product.name, product.price + " ₽");
+  
   // Показать успех
   document.getElementById("order-id").textContent = orderId;
   document.getElementById("products").style.display = "none";
@@ -98,4 +105,27 @@ function resetForm() {
   document.getElementById("order-form").reset();
   currentProduct = null;
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function sendEmail(orderId, name, email, product, price) {
+  if (typeof emailjs === 'undefined') {
+    console.log('EmailJS не загружен');
+    return;
+  }
+  
+  var templateParams = {
+    order_id: orderId,
+    name: name,
+    email: email,
+    product: product,
+    price: price,
+    date: new Date().toLocaleDateString('ru-RU')
+  };
+  
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams)
+    .then(function(response) {
+      console.log('Email отправлен!', response.status, response.text);
+    }, function(error) {
+      console.log('Ошибка отправки email:', error);
+    });
 }
