@@ -68,8 +68,10 @@ function submitOrder(e) {
   var product = products[currentProduct];
   
   console.log("=== ОТПРАВКА ===");
+  console.log("email:", email);
+  
+  // Используем send с 4-м параметром для получателя
   var params = {
-    to_email: email,
     name: name,
     ticket_code: orderId,
     product_type: product.name,
@@ -77,9 +79,15 @@ function submitOrder(e) {
     product_price: product.price + " ₽",
     date: new Date().toLocaleDateString('ru-RU')
   };
-  console.log("params:", JSON.stringify(params));
   
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params)
+  var options = {
+    to_email: email
+  };
+  
+  console.log("params:", JSON.stringify(params));
+  console.log("options:", JSON.stringify(options));
+  
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params, options)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
