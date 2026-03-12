@@ -5,6 +5,9 @@
 
 var currentProduct = null;
 
+// Инициализация
+emailjs.init("ub7ek0pZy8Qf-F1Y-");
+
 function selectProduct(type) {
   currentProduct = type;
   document.getElementById("order-type-text").textContent = products[type].name;
@@ -69,10 +72,9 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка на:", email);
+  console.log("Отправка...");
   
-  // Добавляем publicKey как 4-й параметр
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params, 'ub7ek0pZy8Qf-F1Y-')
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
