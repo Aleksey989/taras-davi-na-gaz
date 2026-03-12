@@ -62,7 +62,9 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
+  // В v4 нужно добавить email как параметр шаблона
   var params = {
+    to_email: email,
     name: name,
     phone: phone,
     ticket_code: orderId,
@@ -72,14 +74,9 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  // Используем 4-й параметр для получателя
-  var options = {
-    to: email
-  };
+  console.log("Отправка...", params);
   
-  console.log("Отправка на:", email, "опции:", options);
-  
-  emailjs.send('service_0plmfib', 'template_jxpfv4v', params, options)
+  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
