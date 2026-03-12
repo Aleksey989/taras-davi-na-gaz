@@ -59,8 +59,6 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("Отправка заказа:", name, email);
-  
   var data = {
     from_name: "ТарасДавиНаГаз",
     client_name: name,
@@ -73,13 +71,19 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", data)
+  var options = {
+    to: "tarasdavinagaz@gmail.com"  // ОТПРАВЛЯЕМ СЕБЕ
+  };
+  
+  console.log("Отправка...", data, options);
+  
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", data, options)
     .then(function(response) {
       console.log('OK!', response);
       alert('Заказ оформлен! Мы свяжемся с вами.');
     }, function(error) {
       console.log('ERR:', error);
-      alert('Ошибка отправки. Проверьте настройки EmailJS.');
+      alert('Ошибка: ' + (error.text || error.message || 'проверьте настройки'));
     });
   
   document.getElementById("order-id").textContent = orderId;
