@@ -1,4 +1,8 @@
-﻿var products = {
+﻿var PUBLIC_KEY = "ub7ek0pZy8Qf-F1Y-";
+var SERVICE_ID = "service_uv8o5xb";
+var TEMPLATE_ID = "template_nvsb1bz";
+
+var products = {
   ticket: { 
     name: "Билет", 
     price: 1500, 
@@ -106,10 +110,8 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Тест - отправляем БЕЗ ПАРАМЕТРОВ
   sendEmailTest(orderId, name, email, product.name, product.price + " ₽", product.desc);
   
-  // Показать успех
   document.getElementById("order-id").textContent = orderId;
   document.getElementById("products").style.display = "none";
   document.getElementById("order").style.display = "none";
@@ -127,14 +129,12 @@ function resetForm() {
 
 function sendEmailTest(orderId, name, email, product, price, productDesc) {
   console.log("=== ТЕСТ ===");
+  console.log("SERVICE:", SERVICE_ID, "TEMPLATE:", TEMPLATE_ID);
   
   if (typeof emailjs === 'undefined') {
     alert('EmailJS не загружен');
     return;
   }
-  
-  // Пробуем отправить БЕЗ ПАРАМЕТРОВ
-  console.log("Отправка...");
   
   emailjs.send(SERVICE_ID, TEMPLATE_ID)
     .then(function(response) {
