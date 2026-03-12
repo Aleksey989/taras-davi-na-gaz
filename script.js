@@ -115,32 +115,43 @@ function resetForm() {
 
 function sendEmail(orderId, name, email, product, price, productDesc, imageUrl) {
   console.log("=== ОТПРАВКА EMAIL ===");
-  console.log("emailjs определён?", typeof emailjs !== 'undefined');
-  console.log("version:", emailjs?.version);
   
   if (typeof emailjs === 'undefined') {
     alert('Ошибка: EmailJS не загружен');
     return;
   }
   
-  var templateParams = {
-    to_name: name,
+  // Используем простой формат - только необходимые параметры
+  var params = {
+    name: name,
     ticket_code: orderId,
     product_type: product,
     product_desc: productDesc,
     product_price: price,
-    date: new Date().toLocaleDateString('ru-RU'),
-    image_url: imageUrl
+    date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Параметры:", JSON.stringify(templateParams));
+  console.log("Отправка с параметрами:", params);
   
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", templateParams)
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params)
     .then(function(response) {
-      console.log('УСПЕХ! Email отправлен', response.status, response.text);
+      console.log('УСПЕХ!', response);
       alert('Билет отправлен на email!');
     }, function(error) {
-      console.log('ОШИБКА отправки email:', error);
-      alert('Ошибка отправки: ' + error.text);
+      console.log('ОШИБКА:', error);
+      // Попробуем без картинки - может в этом проблема
+      if (imageUrl && error.status === 422) {
+        console.log('Пробуем без картинки...');
+        emailjs.send("service_uv8o5xb", "template_nvsb1bz", {
+          name: name,
+          ticket_code: orderId,
+          product_type: product,
+          product_desc: productDesc,
+          product_price: price,
+          date: new Date().toLocaleDateString('ru-RU')
+        }).then(function() {
+          alert('Билет отправлен!');
+        });
+      }
     });
 }
