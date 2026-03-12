@@ -28,17 +28,16 @@ function generateCode() {
 function saveToGoogleSheet(data) {
     console.log('Отправка в таблицу:', data);
     
-    var formData = new FormData();
-    formData.append('json', JSON.stringify(data));
+    var params = 'json=' + encodeURIComponent(JSON.stringify(data));
     
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', GOOGLE_SHEET_URL, true);
+    xhr.open('POST', GOOGLE_SHEET_URL + '?' + params, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             console.log('Ответ таблицы:', xhr.responseText);
         }
     };
-    xhr.send(formData);
+    xhr.send();
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date, imageUrl) {
