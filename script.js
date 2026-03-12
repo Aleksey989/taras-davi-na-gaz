@@ -10,7 +10,6 @@ var currentProduct = null;
 function initEmailJS() {
   if (typeof emailjs !== 'undefined') {
     emailjs.init({ publicKey: PUBLIC_KEY, limitRate: true });
-    console.log('EmailJS OK');
   }
 }
 initEmailJS();
@@ -70,7 +69,6 @@ function submitOrder(e) {
   console.log("=== ОТПРАВКА ===");
   console.log("email:", email);
   
-  // Используем send с 4-м параметром для получателя
   var params = {
     name: name,
     ticket_code: orderId,
@@ -80,20 +78,14 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  var options = {
-    to_email: email
-  };
-  
-  console.log("params:", JSON.stringify(params));
-  console.log("options:", JSON.stringify(options));
-  
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params, options)
+  // Используем параметр 'to' для получателя
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params, { to: email })
     .then(function(response) {
       console.log('OK!', response);
-      alert('Билет отправлен на ' + email + '!');
+      alert('Билет отправлен!');
     }, function(error) {
       console.log('ERR:', error.status, error.text);
-      alert('Ошибка ' + error.status + ': ' + error.text);
+      alert('Ошибка: ' + error.text);
     });
   
   document.getElementById("order-id").textContent = orderId;
