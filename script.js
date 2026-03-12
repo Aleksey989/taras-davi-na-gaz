@@ -89,7 +89,7 @@ function submitOrder(e) {
   console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email, product: product.name, price: product.price + " ₽" });
   
   // Отправить email
-  sendEmail(orderId, name, email, product.name, product.price + " ₽");
+  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc);
   
   // Показать успех
   document.getElementById("order-id").textContent = orderId;
@@ -107,18 +107,18 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function sendEmail(orderId, name, email, product, price) {
+function sendEmail(orderId, name, email, product, price, productDesc) {
   if (typeof emailjs === 'undefined') {
     console.log('EmailJS не загружен');
     return;
   }
   
   var templateParams = {
-    order_id: orderId,
     name: name,
-    email: email,
-    product: product,
-    price: price,
+    ticket_code: orderId,
+    product_type: product,
+    product_desc: productDesc,
+    product_price: price,
     date: new Date().toLocaleDateString('ru-RU')
   };
   
