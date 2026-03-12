@@ -67,9 +67,9 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Отправка с параметрами
   console.log("=== ОТПРАВКА ===");
   var params = {
+    to_email: email,
     name: name,
     ticket_code: orderId,
     product_type: product.name,
@@ -82,7 +82,7 @@ function submitOrder(e) {
   emailjs.send("service_uv8o5xb", "template_nvsb1bz", params)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Билет отправлен!');
+      alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error.status, error.text);
       alert('Ошибка ' + error.status + ': ' + error.text);
