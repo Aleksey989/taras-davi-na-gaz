@@ -177,8 +177,15 @@ onclick="event.preventDefault()">Правилами участия в мероп
 </div>
 </footer>
 <script type="text/javascript">
+// Инициализация EmailJS с публичным ключом
 (function() {
-  emailjs.init("ub7ek0pZy8Qf-F1Y-");
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({
+      publicKey: "ub7ek0pZy8Qf-F1Y-",
+      doNotUseCORS: true
+    });
+    console.log('EmailJS инициализирован');
+  }
 })();
 </script>
 <script src="script.js"></script>
