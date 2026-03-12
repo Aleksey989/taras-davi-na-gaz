@@ -15,7 +15,6 @@
 
 var currentProduct = null;
 
-// Инициализация EmailJS
 function initEmailJS() {
   if (typeof emailjs !== 'undefined') {
     try {
@@ -27,8 +26,6 @@ function initEmailJS() {
     } catch(e) {
       console.log('Ошибка инициализации:', e);
     }
-  } else {
-    console.log('emailjs не загружен');
   }
 }
 
@@ -109,9 +106,7 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("=== ОФОРМЛЕНИЕ ЗАКАЗА ===");
-  
-  // Попробуем отправить
+  // Тест - отправляем БЕЗ ПАРАМЕТРОВ
   sendEmailTest(orderId, name, email, product.name, product.price + " ₽", product.desc);
   
   // Показать успех
@@ -130,42 +125,23 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Тестовая отправка
 function sendEmailTest(orderId, name, email, product, price, productDesc) {
-  console.log("=== ТЕСТ ОТПРАВКИ ===");
+  console.log("=== ТЕСТ ===");
   
   if (typeof emailjs === 'undefined') {
-    alert('Ошибка: EmailJS не загружен');
+    alert('EmailJS не загружен');
     return;
   }
   
-  // Пробуем отправить с разными вариантами параметров
-  var params = {
-    name: name,
-    ticket_code: orderId,
-    product_type: product,
-    product_desc: productDesc,
-    product_price: price,
-    date: new Date().toLocaleDateString('ru-RU')
-  };
+  // Пробуем отправить БЕЗ ПАРАМЕТРОВ
+  console.log("Отправка...");
   
-  console.log("Пробуем отправить...");
-  
-  emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+  emailjs.send(SERVICE_ID, TEMPLATE_ID)
     .then(function(response) {
       console.log('УСПЕХ!', response);
-      alert('Билет отправлен на email!');
+      alert('Работает!');
     }, function(error) {
-      console.log('ОШИБКА 1:', error.status, error.text);
-      
-      // Пробуем без параметров
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, {})
-        .then(function() {
-          console.log('Успех без параметров!');
-          alert('Билет отправлен! (без данных)');
-        }, function(err2) {
-          console.log('ОШИБКА 2:', err2);
-          alert('Ошибка отправки. Код: ' + error.status);
-        });
+      console.log('ОШИБКА:', error.status, error.text);
+      alert('Ошибка ' + error.status + ': ' + error.text);
     });
 }
