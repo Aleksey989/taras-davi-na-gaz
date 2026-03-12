@@ -63,9 +63,10 @@ function submitOrder(e) {
   var product = products[currentProduct];
   
   var params = {
-    to_email: email,
+    from_name: "ТарасДавиНаГаз",
     name: name,
     phone: phone,
+    to_email: email,
     ticket_code: orderId,
     product: product.name,
     desc: product.desc,
@@ -73,10 +74,9 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("NEW VERSION - to_email:", email);
-  console.log("params:", params);
+  console.log("Старые ID - отправка...");
   
-  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
