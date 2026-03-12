@@ -62,7 +62,6 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // В v4 нужно добавить email как параметр шаблона
   var params = {
     to_email: email,
     name: name,
@@ -74,7 +73,8 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка...", params);
+  console.log("NEW VERSION - to_email:", email);
+  console.log("params:", params);
   
   emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
     .then(function(response) {
