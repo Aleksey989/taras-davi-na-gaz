@@ -57,12 +57,11 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Параметры для v3
   var params = {
     from_name: "ТарасДавиНаГаз",
     name: name,
     phone: phone,
-    email: email,
+    to_email: email,
     ticket_code: orderId,
     product: product.name,
     desc: product.desc,
@@ -70,16 +69,15 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка...", params);
+  console.log("Отправка на:", email);
   
-  // v3 формат
   emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Заказ оформлен! Мы свяжемся с вами.');
+      alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error);
-      alert('Ошибка отправки. Проверьте настройки.');
+      alert('Ошибка: ' + error.text);
     });
   
   document.getElementById("order-id").textContent = orderId;
