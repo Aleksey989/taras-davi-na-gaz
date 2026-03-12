@@ -32,7 +32,6 @@ function initEmailJS() {
   }
 }
 
-// Инициализируем сразу после загрузки скрипта
 initEmailJS();
 
 function selectProduct(type) {
@@ -111,10 +110,9 @@ function submitOrder(e) {
   var product = products[currentProduct];
   
   console.log("=== ОФОРМЛЕНИЕ ЗАКАЗА ===");
-  console.log("Заказ:", { orderId: orderId, name: name, phone: phone, email: email });
   
-  // Отправить email
-  sendEmail(orderId, name, email, product.name, product.price + " ₽", product.desc);
+  // Попробуем отправить
+  sendEmailTest(orderId, name, email, product.name, product.price + " ₽", product.desc);
   
   // Показать успех
   document.getElementById("order-id").textContent = orderId;
@@ -132,14 +130,16 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function sendEmail(orderId, name, email, product, price, productDesc) {
-  console.log("=== ОТПРАВКА EMAIL ===");
+// Тестовая отправка
+function sendEmailTest(orderId, name, email, product, price, productDesc) {
+  console.log("=== ТЕСТ ОТПРАВКИ ===");
   
   if (typeof emailjs === 'undefined') {
     alert('Ошибка: EmailJS не загружен');
     return;
   }
   
+  // Пробуем отправить с разными вариантами параметров
   var params = {
     name: name,
     ticket_code: orderId,
@@ -149,15 +149,23 @@ function sendEmail(orderId, name, email, product, price, productDesc) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Параметры:", params);
-  console.log("SERVICE:", SERVICE_ID, "TEMPLATE:", TEMPLATE_ID);
+  console.log("Пробуем отправить...");
   
   emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
     .then(function(response) {
       console.log('УСПЕХ!', response);
       alert('Билет отправлен на email!');
     }, function(error) {
-      console.log('ОШИБКА:', error);
-      alert('Ошибка: ' + error.text);
+      console.log('ОШИБКА 1:', error.status, error.text);
+      
+      // Пробуем без параметров
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, {})
+        .then(function() {
+          console.log('Успех без параметров!');
+          alert('Билет отправлен! (без данных)');
+        }, function(err2) {
+          console.log('ОШИБКА 2:', err2);
+          alert('Ошибка отправки. Код: ' + error.status);
+        });
     });
 }
