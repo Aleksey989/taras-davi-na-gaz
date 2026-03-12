@@ -71,7 +71,8 @@ function submitOrder(e) {
   
   console.log("Отправка на:", email);
   
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
+  // Добавляем publicKey как 4-й параметр
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params, 'ub7ek0pZy8Qf-F1Y-')
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
