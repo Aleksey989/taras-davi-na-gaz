@@ -1,6 +1,4 @@
-﻿var PUBLIC_KEY = "ub7ek0pZy8Qf-F1Y-";
-
-var products = {
+﻿var products = {
   ticket: { name: "Билет", price: 1500, desc: "Поездка 30 минут" },
   certificate: { name: "Подарочный сертификат", price: 3000, desc: "Именной сертификат" }
 };
@@ -59,9 +57,10 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  var data = {
-    from_name: "ТарасДавиНаГаз",
+  var templateParams = {
     to_name: name,
+    to_email: email,
+    from_name: "ТарасДавиНаГаз",
     ticket_code: orderId,
     product_type: product.name,
     product_desc: product.desc,
@@ -69,20 +68,16 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  // Отправляем клиенту через параметр to
-  var options = {
-    to: email
-  };
+  console.log("Отправка...", templateParams);
   
-  console.log("Отправка клиенту:", email);
-  
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", data, options)
+  // Старый формат v3: emailjs.send(serviceId, templateId, params, publicKey)
+  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', templateParams, 'ub7ek0pZy8Qf-F1Y-')
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error);
-      alert('Ошибка: ' + (error.text || 'проверьте настройки EmailJS'));
+      alert('Ошибка: ' + (error.text || error.message || 'проверьте настройки'));
     });
   
   document.getElementById("order-id").textContent = orderId;
