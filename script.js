@@ -5,7 +5,6 @@
 
 var currentProduct = null;
 
-// Инициализация
 emailjs.init({
   publicKey: "ub7ek0pZy8Qf-F1Y-",
   limitRate: { id: "taras-davi-na-gaz" }
@@ -63,27 +62,16 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  var params = {
-    from_name: "ТарасДавиНаГаз",
-    name: name,
-    phone: phone,
-    to_email: email,
-    ticket_code: orderId,
-    product: product.name,
-    desc: product.desc,
-    price: product.price + " ₽",
-    date: new Date().toLocaleDateString('ru-RU')
-  };
+  // Попробуем отправить без параметров - просто тест
+  console.log("Тестовая отправка...");
   
-  console.log("Отправка...");
-  
-  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
+  emailjs.send('service_0plmfib', 'template_jxpfv4v')
     .then(function(response) {
       console.log('OK!', response);
-      alert('Билет отправлен на ' + email + '!');
+      alert('Работает! Шаблон найден.');
     }, function(error) {
       console.log('ERR:', error);
-      alert('Ошибка: ' + (error.text || error.message || 'проверьте настройки'));
+      alert('Ошибка: ' + error.text);
     });
   
   document.getElementById("order-id").textContent = orderId;
