@@ -36,14 +36,10 @@ function saveToGoogleSheet(data) {
         '&ticketCode=' + encodeURIComponent(data.ticketCode) +
         '&price=' + encodeURIComponent(data.price);
     
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            console.log('Ответ таблицы:', xhr.responseText);
-        }
-    };
-    xhr.send();
+    // Используем fetch с no-cors - запрос отправится, но ответ не получим
+    fetch(url, { mode: 'no-cors' })
+        .then(() => console.log('Запрос отправлен'))
+        .catch(err => console.error('Ошибка:', err));
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date, imageUrl) {
