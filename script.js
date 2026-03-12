@@ -5,7 +5,8 @@
 
 let currentProduct = 'ticket';
 
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbykVIjNGH_2x1NIWoRR4iuLtMriMBPv3Q63ZDzkJy4uHGkxgzOkPVD54puGSPBpxg/exec';
+// Google Form URL - нужно заменить на реальный
+const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdOTkJIsBuLF-xqwuA2rRlJ5lztw7lSfbMTcQp2JyxBDl1MFg/formResponse';
 
 function selectProduct(type) {
     currentProduct = type;
@@ -25,21 +26,28 @@ function generateCode() {
     return code;
 }
 
-function saveToGoogleSheet(data) {
-    console.log('Отправка в таблицу:', data);
+function saveToGoogleForm(data) {
+    // Создаём скрытый iframe для отправки формы
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
     
-    var url = GOOGLE_SHEET_URL + 
-        '?name=' + encodeURIComponent(data.name) +
-        '&phone=' + encodeURIComponent(data.phone) +
-        '&email=' + encodeURIComponent(data.email) +
-        '&product=' + encodeURIComponent(data.product) +
-        '&ticketCode=' + encodeURIComponent(data.ticketCode) +
-        '&price=' + encodeURIComponent(data.price);
+    var formUrl = FORM_URL + 
+        '?entry.123456=' + encodeURIComponent(data.name) +
+        '&entry.234567=' + encodeURIComponent(data.phone) +
+        '&entry.345678=' + encodeURIComponent(data.email) +
+        '&entry.456789=' + encodeURIComponent(data.product) +
+        '&entry.567890=' + encodeURIComponent(data.ticketCode) +
+        '&entry.678901=' + encodeURIComponent(data.price);
     
-    // Используем fetch с no-cors - запрос отправится, но ответ не получим
-    fetch(url, { mode: 'no-cors' })
-        .then(() => console.log('Запрос отправлен'))
-        .catch(err => console.error('Ошибка:', err));
+    iframe.src = formUrl;
+    document.body.appendChild(iframe);
+    
+    console.log('Отправка в форму:', formUrl);
+    
+    // Удаляем iframe через 3 секунды
+    setTimeout(function() {
+        document.body.removeChild(iframe);
+    }, 3000);
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date, imageUrl) {
@@ -87,7 +95,7 @@ function submitOrder(e) {
     const product = products[currentProduct];
     const date = new Date().toLocaleDateString('ru-RU');
     
-    saveToGoogleSheet({
+    saveToGoogleForm({
         name: name,
         phone: phone,
         email: email,
