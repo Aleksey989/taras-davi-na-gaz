@@ -576,7 +576,22 @@ body::before {
     }
 }
 
-.footer-links { display: flex; gap: 20px; flex-wrap: wrap; } .footer-links a { color: #888; text-decoration: none; } .footer-links a:hover { color: #fff; } .footer-links-old {
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-links-old {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -645,7 +660,7 @@ body::before {
     }
 
     .logo-text {
-        font-size: 22px;
+        font-size: 30px;
     }
 
     .logo-icon {
@@ -665,7 +680,22 @@ body::before {
         text-align: center;
     }
 
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; } .footer-links a { color: #888; text-decoration: none; } .footer-links a:hover { color: #fff; } .footer-links-old {
+    .footer-links {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        color: #888;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        color: #fff;
+    }
+
+    .footer-links-old {
         justify-content: center;
     }
 }

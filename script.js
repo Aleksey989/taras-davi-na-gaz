@@ -5,6 +5,9 @@
 
 let currentProduct = 'ticket';
 
+// Google Apps Script URL
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzV4mimX1T-Vy2nOWpZJEVeXWoy6eRkzUm7FYElEh9Pom0-YkVFC9cueMdTuj4rlon6/exec';
+
 function selectProduct(type) {
     currentProduct = type;
     document.getElementById('order-type-text').textContent = products[type].name;
@@ -21,6 +24,19 @@ function generateCode() {
     code += '-';
     for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
     return code;
+}
+
+function saveToGoogleSheet(data) {
+    fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }).then(() => {
+        console.log('Данные сохранены в таблицу');
+    }).catch(err => {
+        console.log('Ошибка сохранения в таблицу:', err);
+    });
 }
 
 function sendEmail(name, email, ticketCode, productType, productDesc, productPrice, date, imageUrl) {
@@ -67,6 +83,16 @@ function submitOrder(e) {
     const ticketCode = generateCode();
     const product = products[currentProduct];
     const date = new Date().toLocaleDateString('ru-RU');
+    
+    // Сохраняем в Google Таблицу
+    saveToGoogleSheet({
+        name: name,
+        phone: phone,
+        email: email,
+        product: product.name,
+        ticketCode: ticketCode,
+        price: product.price + ' ₽'
+    });
     
     document.getElementById('ticket-type').textContent = product.name;
     document.getElementById('ticket-code').textContent = ticketCode;
