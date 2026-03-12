@@ -9,7 +9,7 @@ var currentProduct = null;
 
 function initEmailJS() {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: PUBLIC_KEY });
+    emailjs.init(PUBLIC_KEY);
   }
 }
 initEmailJS();
@@ -66,14 +66,24 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Попробуем через sendForm
-  var form = document.getElementById("order-form");
+  // Создаем данные для отправки
+  var data = {
+    from_name: "ТарасДавиНаГаз",
+    to_name: name,
+    to_email: email,
+    ticket_code: orderId,
+    product_type: product.name,
+    product_desc: product.desc,
+    product_price: product.price + " ₽",
+    date: new Date().toLocaleDateString('ru-RU')
+  };
   
-  // Отправляем просто данные
-  emailjs.sendForm("service_uv8o5xb", "template_nvsb1bx", form, PUBLIC_KEY)
+  console.log("Отправка:", data);
+  
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", data)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Отправлено!');
+      alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error);
       alert('Ошибка: ' + error.text);
