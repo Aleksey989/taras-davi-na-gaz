@@ -5,7 +5,7 @@
 
 let currentProduct = 'ticket';
 
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyHfR3zdU36q_sRmeEUDw22uSmZY0uzKtEiFkhF4kvbRtFrM6ljdL1zBnUhiPDVs3-y/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbykVIjNGH_2x1NIWoRR4iuLtMriMBPv3Q63ZDzkJy4uHGkxgzOkPVD54puGSPBpxg/exec';
 
 function selectProduct(type) {
     currentProduct = type;
@@ -28,7 +28,6 @@ function generateCode() {
 function saveToGoogleSheet(data) {
     console.log('Отправка в таблицу:', data);
     
-    // Формируем URL с параметрами
     var url = GOOGLE_SHEET_URL + 
         '?name=' + encodeURIComponent(data.name) +
         '&phone=' + encodeURIComponent(data.phone) +
