@@ -5,7 +5,7 @@
 
 var currentProduct = null;
 
-// Инициализация с явным publicKey
+// Инициализация
 emailjs.init({
   publicKey: "ub7ek0pZy8Qf-F1Y-",
   limitRate: { id: "taras-davi-na-gaz" }
@@ -75,12 +75,10 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка...", params);
+  console.log("Отправка...");
   
-  // Пробуем с 4 параметрами
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params, {
-    to_email: email
-  })
+  // Новый service ID
+  emailjs.send('service_0plmfib', 'template_nvsb1bz', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
