@@ -62,13 +62,24 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  // Попробуем отправить без параметров - просто тест
-  console.log("Тестовая отправка...");
+  // Параметры
+  var params = {
+    name: name,
+    phone: phone,
+    to_email: email,
+    ticket_code: orderId,
+    product: product.name,
+    desc: product.desc,
+    price: product.price + " ₽",
+    date: new Date().toLocaleDateString('ru-RU')
+  };
   
-  emailjs.send('service_0plmfib', 'template_jxpfv4v')
+  console.log("Отправка на:", email);
+  
+  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Работает! Шаблон найден.');
+      alert('Билет отправлен на ' + email + '!');
     }, function(error) {
       console.log('ERR:', error);
       alert('Ошибка: ' + error.text);
