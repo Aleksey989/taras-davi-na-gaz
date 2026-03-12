@@ -9,7 +9,7 @@ var currentProduct = null;
 
 function initEmailJS() {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: PUBLIC_KEY, limitRate: true });
+    emailjs.init({ publicKey: PUBLIC_KEY });
   }
 }
 initEmailJS();
@@ -66,25 +66,16 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("=== ОТПРАВКА ===");
-  console.log("email:", email);
+  // Попробуем через sendForm
+  var form = document.getElementById("order-form");
   
-  var params = {
-    name: name,
-    ticket_code: orderId,
-    product_type: product.name,
-    product_desc: product.desc,
-    product_price: product.price + " ₽",
-    date: new Date().toLocaleDateString('ru-RU')
-  };
-  
-  // Используем параметр 'to' для получателя
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", params, { to: email })
+  // Отправляем просто данные
+  emailjs.sendForm("service_uv8o5xb", "template_nvsb1bx", form, PUBLIC_KEY)
     .then(function(response) {
       console.log('OK!', response);
-      alert('Билет отправлен!');
+      alert('Отправлено!');
     }, function(error) {
-      console.log('ERR:', error.status, error.text);
+      console.log('ERR:', error);
       alert('Ошибка: ' + error.text);
     });
   
