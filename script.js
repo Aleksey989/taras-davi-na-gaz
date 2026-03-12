@@ -74,9 +74,11 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Старые ID - отправка...");
+  console.log("Отправка...");
+  console.log("service: service_0plmfib, template: template_jxpfv4v");
+  console.log("params:", params);
   
-  emailjs.send('service_uv8o5xb', 'template_nvsb1bz', params)
+  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
     .then(function(response) {
       console.log('OK!', response);
       alert('Билет отправлен на ' + email + '!');
