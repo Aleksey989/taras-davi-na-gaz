@@ -5,10 +5,17 @@
 
 var currentProduct = null;
 
+// Проверка загрузки
+console.log("emailjs:", typeof emailjs);
+
 (function() {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init('ub7ek0pZy8Qf-F1Y-');
-    console.log('EmailJS v3 init OK');
+    try {
+      emailjs.init('ub7ek0pZy8Qf-F1Y-');
+      console.log('EmailJS init OK');
+    } catch(e) {
+      console.log('EmailJS init ERR:', e);
+    }
   }
 })();
 
@@ -64,7 +71,16 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
+  console.log("=== ТЕСТ ===");
+  console.log("service: service_0plmfib");
+  console.log("template: template_jxpfv4v");
   console.log("email:", email);
+  
+  // Проверим что emailjs загружен
+  if (typeof emailjs === 'undefined') {
+    alert('Ошибка: EmailJS не загружен!');
+    return;
+  }
   
   var templateParams = {
     name: name,
@@ -77,13 +93,16 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
+  console.log("params:", JSON.stringify(templateParams));
+  
+  // Пробуем отправить
   emailjs.send("service_0plmfib", "template_jxpfv4v", templateParams)
   .then(function(response) {
     console.log('OK!', response);
-    alert('Билет отправлен на ' + email + '!');
+    alert('Билет отправлен!');
   }, function(error) {
-    console.log('ERR:', error);
-    alert('Ошибка: ' + (error.text || error.message || JSON.stringify(error)));
+    console.log('ERR:', error.status, error.text);
+    alert('Ошибка ' + error.status + ': ' + error.text);
   });
   
   document.getElementById("order-id").textContent = orderId;
