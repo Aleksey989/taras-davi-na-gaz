@@ -57,9 +57,8 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("Отправка на email:", email);
+  console.log("Отправка на:", email);
   
-  // Параметры для шаблона
   var templateParams = {
     name: name,
     phone: phone,
@@ -71,16 +70,14 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  // Отправляем с параметром to в 4-м аргументе
-  emailjs.send("service_uv8o5xb", "template_nvsb1bz", templateParams, {
-    toEmail: email
-  })
+  // Новый шаблон
+  emailjs.send("service_uv8o5xb", "template_bh7w74q", templateParams)
   .then(function(response) {
     console.log('OK!', response);
     alert('Билет отправлен на ' + email + '!');
   }, function(error) {
     console.log('ERR:', error);
-    alert('Ошибка: ' + JSON.stringify(error));
+    alert('Ошибка: ' + (error.text || error.message || JSON.stringify(error)));
   });
   
   document.getElementById("order-id").textContent = orderId;
