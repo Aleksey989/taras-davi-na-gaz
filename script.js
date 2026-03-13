@@ -15,16 +15,11 @@
 
 var currentProduct = null;
 
-console.log("emailjs:", typeof emailjs);
-
 (function() {
   if (typeof emailjs !== 'undefined') {
     try {
       emailjs.init('ub7ek0pZy8Qf-F1Y-');
-      console.log('EmailJS init OK');
-    } catch(e) {
-      console.log('EmailJS init ERR:', e);
-    }
+    } catch(e) {}
   }
 })();
 
@@ -36,7 +31,6 @@ function selectProduct(type) {
   document.getElementById("recipient-group").style.display = type === "certificate" ? "block" : "none";
   document.getElementById("products").style.display = "none";
   document.getElementById("order").style.display = "block";
-  document.getElementById("order").scrollIntoView({ behavior: "smooth" });
 }
 
 function goBack() {
@@ -80,6 +74,9 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
+  // Используем другой шаблон для каждого типа
+  var templateId = currentProduct === 'ticket' ? 'template_jxpfv4v' : 'template_jxpfv4v';
+  
   var templateParams = {
     name: name,
     phone: phone,
@@ -92,15 +89,16 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("params:", JSON.stringify(templateParams));
+  console.log("product:", product.name);
+  console.log("image:", product.image);
   
-  emailjs.send("service_0plmfib", "template_jxpfv4v", templateParams)
+  emailjs.send("service_0plmfib", templateId, templateParams)
   .then(function(response) {
     console.log('OK!', response);
     alert('Билет отправлен!');
   }, function(error) {
     console.log('ERR:', error.status, error.text);
-    alert('Ошибка ' + error.status + ': ' + error.text);
+    alert('Ошибка: ' + error.text);
   });
   
   document.getElementById("order-id").textContent = orderId;

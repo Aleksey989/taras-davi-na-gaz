@@ -1,153 +1,165 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ТарасДавиНаГаз | Билеты и сертификаты</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТарасДавиНаГаз | Билеты и сертификаты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<header class="header">
-<div class="container">
-<div class="logo">
-<span class="logo-text">ТарасДавиНаГаз</span>
-</div>
-</div>
-</header>
-<main class="main">
-<section class="hero">
-<div class="container">
-<h1 class="hero-title">Билеты и подарочные сертификаты</h1>
-<p class="hero-subtitle">Выберите подходящий вариант и оформите заказ</p>
-</div>
-</section>
-<section class="products" id="products">
-<div class="container">
-<div class="products-grid">
-<div class="product-card" data-type="ticket">
-<div class="product-badge">Популярное</div>
-<img src="img/photo_2026-02-06_18-24-18.jpg" alt="ТарасДавиНаГаз" class="product-img">
-<h2 class="product-title">Билет</h2>
-<p class="product-desc">Билет с уникальным номером - приходит на email автоматически</p>
-<div class="product-price">
-<span class="price-amount">1 500 ₽</span>
-</div>
-<button class="btn btn-primary" onclick="selectProduct('ticket')">
-Выбрать билет
-</button>
-</div>
-<div class="product-card" data-type="certificate">
-<div class="product-badge gift">Подарок</div>
-<img src="img/photo_2026-02-13_18-37-39.jpg" alt="Подарочный сертификат" class="product-img">
-<h2 class="product-title">Подарочный сертификат</h2>
-<p class="product-desc">Именной сертификат с уникальным номером - приходит на email автоматически</p>
-<div class="product-price">
-<span class="price-amount">3 000 ₽</span>
-</div>
-<button class="btn btn-primary" onclick="selectProduct('certificate')">
-Выбрать сертификат
-</button>
-</div>
-</div>
-</div>
-</section>
-<section class="order" id="order" style="display: none;">
-<div class="container">
-<div class="order-card">
-<button class="back-btn" onclick="goBack()">
-← Назад к выбору
-</button>
-<h2 class="order-title">Оформление заказа</h2>
-<p class="order-subtitle" id="order-type-text">Билет</p>
-<form id="order-form" onsubmit="submitOrder(event)">
-<div class="form-group">
-<label class="form-label" for="name">Имя *</label>
-<input type="text" id="name" name="name" class="form-input" required placeholder="Ваше имя">
-<span class="error-message" id="name-error"></span>
-</div>
-<div class="form-group">
-<label class="form-label" for="phone">Телефон *</label>
-<input type="tel" id="phone" name="phone" class="form-input" required placeholder="+7 (999) 123-45-67">
-<span class="error-message" id="phone-error"></span>
-</div>
-<div class="form-group">
-<label class="form-label" for="email">Email *</label>
-<input type="email" id="email" name="email" class="form-input" required placeholder="example@mail.ru">
-<span class="error-message" id="email-error"></span>
-</div>
-<div class="form-group" id="recipient-group" style="display: none;">
-<label class="form-label" for="recipient-name">Имя получателя</label>
-<input type="text" id="recipient-name" name="recipient-name" class="form-input" placeholder="Для кого сертификат">
-</div>
-<div class="form-group">
-<label class="form-label" for="comment">Комментарий</label>
-<textarea id="comment" name="comment" class="form-input form-textarea" placeholder="Пожелания или дополнительная информация"></textarea>
-</div>
-<div class="agreements">
-<div class="agreements-title">Обязательные согласия *</div>
-<label class="agreement-item">
-<input type="checkbox" id="agree-offer" class="agreement-checkbox" required>
-<span class="agreement-text">Я согласен с <a href="#" onclick="event.preventDefault()">Договором оферты</a> *</span>
-</label>
-<label class="agreement-item">
-<input type="checkbox" id="agree-privacy" class="agreement-checkbox" required>
-<span class="agreement-text">Я согласен с <a href="#" onclick="event.preventDefault()">Политикой конфиденциальности</a> *</span>
-</label>
-<label class="agreement-item">
-<input type="checkbox" id="agree-rules" class="agreement-checkbox" required>
-<span class="agreement-text">Я ознакомлен с <a href="#" onclick="event.preventDefault()">Правилами участия в мероприятии</a> *</span>
-</label>
-<span class="agreement-error" id="agreements-error"></span>
-</div>
-<div class="order-summary">
-<div class="summary-row">
-<span>Товар:</span>
-<span id="summary-product">Билет</span>
-</div>
-<div class="summary-row total">
-<span>К оплате:</span>
-<span id="summary-price">1 500 ₽</span>
-</div>
-</div>
-<button type="submit" class="btn btn-submit">
-Оформить заказ
-</button>
-</form>
-</div>
-</div>
-</section>
-<section class="success" id="success" style="display: none;">
-<div class="container">
-<div class="success-card">
-<div class="success-icon">✅</div>
-<h2 class="success-title">Заказ оформлен!</h2>
-<p class="success-text">Спасибо за заказ! Мы свяжемся с вами в ближайшее время для подтверждения.</p>
-<p class="success-order-id">Номер заказа: <span id="order-id"></span></p>
-<button class="btn btn-primary" onclick="resetForm()">Вернуться на главную</button>
-</div>
-</div>
-</section>
-</main>
-<footer class="footer">
-<div class="container">
-<div class="footer-content">
-<div class="footer-logo">ТарасДавиНаГаз</div>
-<div class="footer-links">
-<a href="#" class="footer-link">О нас</a>
-<a href="#" class="footer-link">Контакты</a>
-<a href="#" class="footer-link">Оферта</a>
-<a href="#" class="footer-link">Политика конфиденциальности</a>
-</div>
-<div class="footer-copyright">
-© 2026 ТарасДавиНаГаз. Все права защищены.
-</div>
-</div>
-</div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script src="script.js?v=20260320"></script>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">ТарасДавиНаГаз</span>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Билеты и подарочные сертификаты</h1>
+                <p class="hero-subtitle">Выберите подходящий вариант и оформите заказ</p>
+            </div>
+        </section>
+        <section class="products" id="products">
+            <div class="container">
+                <div class="products-grid">
+                    <div class="product-card" data-type="ticket">
+                        <div class="product-badge">Популярное</div>
+                        <img src="{{product_image}}" alt="ТарасДавиНаГаз" class="product-img">
+                        <h2 class="product-title">Билет</h2>
+                        <p class="product-desc">Билет с уникальным номером - приходит на email автоматически</p>
+                        <div class="product-price">
+                            <span class="price-amount">1 500 ₽</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectProduct('ticket')">
+                            Выбрать билет
+                        </button>
+                    </div>
+                    <div class="product-card" data-type="certificate">
+                        <div class="product-badge gift">Подарок</div>
+                        <img src="{{product_image}}" alt="Подарочный сертификат" class="product-img">
+                        <h2 class="product-title">Подарочный сертификат</h2>
+                        <p class="product-desc">Именной сертификат с уникальным номером - приходит на email
+                            автоматически</p>
+                        <div class="product-price">
+                            <span class="price-amount">3 000 ₽</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectProduct('certificate')">
+                            Выбрать сертификат
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="order" id="order" style="display: none;">
+            <div class="container">
+                <div class="order-card">
+                    <button class="back-btn" onclick="goBack()">
+                        ← Назад к выбору
+                    </button>
+                    <h2 class="order-title">Оформление заказа</h2>
+                    <p class="order-subtitle" id="order-type-text">Билет</p>
+                    <form id="order-form" onsubmit="submitOrder(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Имя *</label>
+                            <input type="text" id="name" name="name" class="form-input" required placeholder="Ваше имя">
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required
+                                placeholder="+7 (999) 123-45-67">
+                            <span class="error-message" id="phone-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required
+                                placeholder="example@mail.ru">
+                            <span class="error-message" id="email-error"></span>
+                        </div>
+                        <div class="form-group" id="recipient-group" style="display: none;">
+                            <label class="form-label" for="recipient-name">Имя получателя</label>
+                            <input type="text" id="recipient-name" name="recipient-name" class="form-input"
+                                placeholder="Для кого сертификат">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="comment">Комментарий</label>
+                            <textarea id="comment" name="comment" class="form-input form-textarea"
+                                placeholder="Пожелания или дополнительная информация"></textarea>
+                        </div>
+                        <div class="agreements">
+                            <div class="agreements-title">Обязательные согласия *</div>
+                            <label class="agreement-item">
+                                <input type="checkbox" id="agree-offer" class="agreement-checkbox" required>
+                                <span class="agreement-text">Я согласен с <a href="#"
+                                        onclick="event.preventDefault()">Договором оферты</a> *</span>
+                            </label>
+                            <label class="agreement-item">
+                                <input type="checkbox" id="agree-privacy" class="agreement-checkbox" required>
+                                <span class="agreement-text">Я согласен с <a href="#"
+                                        onclick="event.preventDefault()">Политикой конфиденциальности</a> *</span>
+                            </label>
+                            <label class="agreement-item">
+                                <input type="checkbox" id="agree-rules" class="agreement-checkbox" required>
+                                <span class="agreement-text">Я ознакомлен с <a href="#"
+                                        onclick="event.preventDefault()">Правилами участия в мероприятии</a> *</span>
+                            </label>
+                            <span class="agreement-error" id="agreements-error"></span>
+                        </div>
+                        <div class="order-summary">
+                            <div class="summary-row">
+                                <span>Товар:</span>
+                                <span id="summary-product">Билет</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>К оплате:</span>
+                                <span id="summary-price">1 500 ₽</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-submit">
+                            Оформить заказ
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="success" id="success" style="display: none;">
+            <div class="container">
+                <div class="success-card">
+                    <div class="success-icon">✅</div>
+                    <h2 class="success-title">Заказ оформлен!</h2>
+                    <p class="success-text">Спасибо за заказ! Мы свяжемся с вами в ближайшее время для подтверждения.
+                    </p>
+                    <p class="success-order-id">Номер заказа: <span id="order-id"></span></p>
+                    <button class="btn btn-primary" onclick="resetForm()">Вернуться на главную</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ТарасДавиНаГаз</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">О нас</a>
+                    <a href="#" class="footer-link">Контакты</a>
+                    <a href="#" class="footer-link">Оферта</a>
+                    <a href="#" class="footer-link">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 ТарасДавиНаГаз. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js?v=20260320"></script>
 </body>
+
 </html>
