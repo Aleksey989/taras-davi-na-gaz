@@ -5,7 +5,6 @@
 
 var currentProduct = null;
 
-// Инициализация для v3
 (function() {
   if (typeof emailjs !== 'undefined') {
     emailjs.init('ub7ek0pZy8Qf-F1Y-');
@@ -78,7 +77,7 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  emailjs.send("service_0plmfib", "template_bh7w74q", templateParams)
+  emailjs.send("service_0plmfib", "template_jxpfv4v", templateParams)
   .then(function(response) {
     console.log('OK!', response);
     alert('Билет отправлен на ' + email + '!');
