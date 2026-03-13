@@ -5,17 +5,11 @@
 
 var currentProduct = null;
 
-// Инициализация при загрузке
-(function init() {
+// Инициализация для v3
+(function() {
   if (typeof emailjs !== 'undefined') {
-    try {
-      emailjs.init('ub7ek0pZy8Qf-F1Y-');
-      console.log('EmailJS init OK');
-    } catch(e) {
-      console.log('EmailJS init ERR:', e);
-    }
-  } else {
-    console.log('EmailJS not loaded');
+    emailjs.init('ub7ek0pZy8Qf-F1Y-');
+    console.log('EmailJS v3 init OK');
   }
 })();
 
