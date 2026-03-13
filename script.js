@@ -1,11 +1,20 @@
 ﻿var products = {
-  ticket: { name: "Билет", price: 1500, desc: "Поездка 30 минут" },
-  certificate: { name: "Подарочный сертификат", price: 3000, desc: "Именной сертификат" }
+  ticket: { 
+    name: "Билет", 
+    price: 1500, 
+    desc: "Поездка 30 минут",
+    image: "https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-06_18-24-18.jpg"
+  },
+  certificate: { 
+    name: "Подарочный сертификат", 
+    price: 3000, 
+    desc: "Именной сертификат",
+    image: "https://aleksey989.github.io/taras-davi-na-gaz/img/photo_2026-02-13_18-37-39.jpg"
+  }
 };
 
 var currentProduct = null;
 
-// Проверка загрузки
 console.log("emailjs:", typeof emailjs);
 
 (function() {
@@ -71,17 +80,6 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("=== ТЕСТ ===");
-  console.log("service: service_0plmfib");
-  console.log("template: template_jxpfv4v");
-  console.log("email:", email);
-  
-  // Проверим что emailjs загружен
-  if (typeof emailjs === 'undefined') {
-    alert('Ошибка: EmailJS не загружен!');
-    return;
-  }
-  
   var templateParams = {
     name: name,
     phone: phone,
@@ -90,12 +88,12 @@ function submitOrder(e) {
     product_type: product.name,
     product_desc: product.desc,
     product_price: product.price + " ₽",
+    product_image: product.image,
     date: new Date().toLocaleDateString('ru-RU')
   };
   
   console.log("params:", JSON.stringify(templateParams));
   
-  // Пробуем отправить
   emailjs.send("service_0plmfib", "template_jxpfv4v", templateParams)
   .then(function(response) {
     console.log('OK!', response);
