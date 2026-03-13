@@ -5,11 +5,6 @@
 
 var currentProduct = null;
 
-emailjs.init({
-  publicKey: "ub7ek0pZy8Qf-F1Y-",
-  limitRate: { id: "taras-davi-na-gaz" }
-});
-
 function selectProduct(type) {
   currentProduct = type;
   document.getElementById("order-type-text").textContent = products[type].name;
@@ -62,30 +57,31 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  var params = {
-    from_name: "ТарасДавиНаГаз",
+  console.log("Отправка на email:", email);
+  
+  // Параметры для шаблона
+  var templateParams = {
     name: name,
     phone: phone,
-    to_email: email,
+    email: email,
     ticket_code: orderId,
-    product: product.name,
-    desc: product.desc,
-    price: product.price + " ₽",
+    product_type: product.name,
+    product_desc: product.desc,
+    product_price: product.price + " ₽",
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  console.log("Отправка...");
-  console.log("service: service_0plmfib, template: template_jxpfv4v");
-  console.log("params:", params);
-  
-  emailjs.send('service_0plmfib', 'template_jxpfv4v', params)
-    .then(function(response) {
-      console.log('OK!', response);
-      alert('Билет отправлен на ' + email + '!');
-    }, function(error) {
-      console.log('ERR:', error);
-      alert('Ошибка: ' + error.text);
-    });
+  // Отправляем с параметром to в 4-м аргументе
+  emailjs.send("service_uv8o5xb", "template_nvsb1bz", templateParams, {
+    toEmail: email
+  })
+  .then(function(response) {
+    console.log('OK!', response);
+    alert('Билет отправлен на ' + email + '!');
+  }, function(error) {
+    console.log('ERR:', error);
+    alert('Ошибка: ' + JSON.stringify(error));
+  });
   
   document.getElementById("order-id").textContent = orderId;
   document.getElementById("products").style.display = "none";
