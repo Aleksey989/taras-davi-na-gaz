@@ -357,7 +357,7 @@ body::before {
 
 .agreements {
     margin-bottom: 24px;
-    padding: 20px;
+    padding: 10px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
 }
@@ -623,7 +623,7 @@ body::before {
         height: 180px;
     }
     .order-card {
-        padding: 24px;
+        padding: 15px;
     }
     .success-card {
         padding: 40px 24px;
@@ -642,13 +642,22 @@ body::before {
         padding: 0 20px;
     }
     .agreement-label {
-        font-size: 12px;
+        font-size: 9px;
     }
     .footer-content {
         flex-direction: column;
         text-align: center;
     }
-    .footer-links {
-        justify-content: center;
+    .agreement-row {
+        font-size: 9px;
+    }
+    .doc-btn {
+        font-size: 9px;
+    }
+    .summary-row {
+        font-size: 14px;
+    }
+    .summary-row.total {
+        font-size: 16px;
     }
 }
