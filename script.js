@@ -70,8 +70,8 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  // Новый шаблон
-  emailjs.send("service_uv8o5xb", "template_bh7w74q", templateParams)
+  // Новый сервис и шаблон
+  emailjs.send("service_0plmfib", "template_bh7w74q", templateParams)
   .then(function(response) {
     console.log('OK!', response);
     alert('Билет отправлен на ' + email + '!');
