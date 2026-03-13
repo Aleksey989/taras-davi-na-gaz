@@ -5,6 +5,20 @@
 
 var currentProduct = null;
 
+// Инициализация при загрузке
+(function init() {
+  if (typeof emailjs !== 'undefined') {
+    try {
+      emailjs.init('ub7ek0pZy8Qf-F1Y-');
+      console.log('EmailJS init OK');
+    } catch(e) {
+      console.log('EmailJS init ERR:', e);
+    }
+  } else {
+    console.log('EmailJS not loaded');
+  }
+})();
+
 function selectProduct(type) {
   currentProduct = type;
   document.getElementById("order-type-text").textContent = products[type].name;
@@ -57,7 +71,7 @@ function submitOrder(e) {
   var orderId = generateOrderId();
   var product = products[currentProduct];
   
-  console.log("Отправка на:", email);
+  console.log("email:", email);
   
   var templateParams = {
     name: name,
@@ -70,7 +84,6 @@ function submitOrder(e) {
     date: new Date().toLocaleDateString('ru-RU')
   };
   
-  // Новый сервис и шаблон
   emailjs.send("service_0plmfib", "template_bh7w74q", templateParams)
   .then(function(response) {
     console.log('OK!', response);
