@@ -7,15 +7,17 @@
     <title>ТарасДавиНаГаз | Билеты и сертификаты</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
 </head>
 
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <span class="logo-text">ТарасДавиНаГаз</span>
+            <div class="logo"><span
+                    class="logo-text">ТарасДавиНаГаз</span>
             </div>
         </div>
     </header>
@@ -49,11 +51,13 @@
                         <div class="product-badge gift">Подарок</div>
                         <div class="product-gallery">
                             <div class="gallery-main">
-                                <img src="img/photo_2026-02-13_18-37-39.jpg" alt="Подарочный сертификат" class="gallery-img">
+                                <img src="img/photo_2026-02-13_18-37-39.jpg" alt="Подарочный сертификат"
+                                    class="gallery-img">
                             </div>
                         </div>
                         <h2 class="product-title">Подарочный сертификат</h2>
-                        <p class="product-desc">Именной сертификат с уникальным номером - приходит на email автоматически</p>
+                        <p class="product-desc">Именной сертификат с уникальным номером - приходит на email
+                            автоматически</p>
                         <div class="product-price">
                             <span class="price-amount">3 000 ₽</span>
                         </div>
@@ -80,21 +84,25 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="phone">Телефон *</label>
-                            <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+7 (999) 123-45-67">
+                            <input type="tel" id="phone" name="phone" class="form-input" required
+                                placeholder="+7 (999) 123-45-67">
                             <span class="error-message" id="phone-error"></span>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="email">Email *</label>
-                            <input type="email" id="email" name="email" class="form-input" required placeholder="example@mail.ru">
+                            <input type="email" id="email" name="email" class="form-input" required
+                                placeholder="example@mail.ru">
                             <span class="error-message" id="email-error"></span>
                         </div>
                         <div class="form-group" id="recipient-group" style="display: none;">
                             <label class="form-label" for="recipient-name">Имя получателя</label>
-                            <input type="text" id="recipient-name" name="recipient-name" class="form-input" placeholder="Для кого сертификат">
+                            <input type="text" id="recipient-name" name="recipient-name" class="form-input"
+                                placeholder="Для кого сертификат">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="comment">Комментарий</label>
-                            <textarea id="comment" name="comment" class="form-input form-textarea" placeholder="Пожелания или дополнительная информация"></textarea>
+                            <textarea id="comment" name="comment" class="form-input form-textarea"
+                                placeholder="Пожелания или дополнительная информация"></textarea>
                         </div>
                         <div class="agreements">
                             <div class="agreements-title">Обязательные согласия *</div>
@@ -106,12 +114,14 @@
                             <div class="agreement-row">
                                 <input type="checkbox" id="agree-privacy" class="agreement-checkbox" required>
                                 <label for="agree-privacy" class="agreement-label">Я согласен с</label>
-                                <button type="button" class="doc-btn" id="btn-privacy">Политикой конфиденциальности</button> *
+                                <button type="button" class="doc-btn" id="btn-privacy">Политикой
+                                    конфиденциальности</button> *
                             </div>
                             <div class="agreement-row">
                                 <input type="checkbox" id="agree-rules" class="agreement-checkbox" required>
                                 <label for="agree-rules" class="agreement-label">Я ознакомлен с</label>
-                                <button type="button" class="doc-btn" id="btn-rules">Правилами участия в мероприятии</button> *
+                                <button type="button" class="doc-btn" id="btn-rules">Правилами участия в
+                                    мероприятии</button> *
                             </div>
                             <span class="agreement-error" id="agreements-error"></span>
                         </div>
@@ -137,14 +147,15 @@
                 <div class="success-card">
                     <div class="success-icon">✅</div>
                     <h2 class="success-title">Заказ оформлен!</h2>
-                    <p class="success-text">Спасибо за заказ! Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+                    <p class="success-text">Спасибо за заказ! Мы свяжемся с вами в ближайшее время для подтверждения.
+                    </p>
                     <p class="success-order-id">Номер заказа: <span id="order-id"></span></p>
                     <button class="btn btn-primary" onclick="resetForm()">Вернуться на главную</button>
                 </div>
             </div>
         </section>
     </main>
-    
+
     <!-- Модальное окно для документов -->
     <div id="doc-modal" class="modal" style="display: none;">
         <div class="modal-content">
@@ -152,7 +163,7 @@
             <div id="doc-content"></div>
         </div>
     </div>
-    
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -176,31 +187,32 @@
             privacy: '<h1>Политика конфиденциальности</h1><p><strong>Дата публикации:</strong> 01.01.2026</p><h2>1. Общие положения</h2><p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей.</p><h2>2. Какие данные мы собираем</h2><p>Мы собираем: имя, телефон, email и иные данные, указанные при оформлении заказа.</p><h2>3. Цели обработки</h2><p>Данные используются для оформления заказов и связи с пользователями.</p><h2>4. Защита данных</h2><p>Мы принимаем меры для защиты ваших персональных данных.</p>',
             rules: '<h1>Правила участия в мероприятии</h1><p><strong>Дата публикации:</strong> 01.01.2026</p><h2>1. Общие положения</h2><p>Участие в мероприятии означает согласие с настоящими Правилами.</p><h2>2. Порядок участия</h2><p>Для участия необходимо приобрести билет и прибыть к месту проведения в указанное время.</p><h2>3. Права и обязанности</h2><p>Участники обязаны соблюдать правила и выполнять указания организаторов.</p><h2>4. Запрещённые действия</h2><p>Запрещено проносить алкоголь, наркотики, оружие и нарушать общественный порядок.</p>'
         };
-        
+
         function showDoc(type) {
             var modal = document.getElementById('doc-modal');
             var content = document.getElementById('doc-content');
             content.innerHTML = docContents[type];
             modal.style.display = 'flex';
         }
-        
+
         function hideDoc() {
             document.getElementById('doc-modal').style.display = 'none';
         }
-        
-        document.getElementById('btn-offer').addEventListener('click', function() { showDoc('offer'); });
-        document.getElementById('btn-privacy').addEventListener('click', function() { showDoc('privacy'); });
-        document.getElementById('btn-rules').addEventListener('click', function() { showDoc('rules'); });
-        document.getElementById('footer-offer').addEventListener('click', function() { showDoc('offer'); });
-        document.getElementById('footer-privacy').addEventListener('click', function() { showDoc('privacy'); });
-        document.getElementById('footer-rules').addEventListener('click', function() { showDoc('rules'); });
+
+        document.getElementById('btn-offer').addEventListener('click', function () { showDoc('offer'); });
+        document.getElementById('btn-privacy').addEventListener('click', function () { showDoc('privacy'); });
+        document.getElementById('btn-rules').addEventListener('click', function () { showDoc('rules'); });
+        document.getElementById('footer-offer').addEventListener('click', function () { showDoc('offer'); });
+        document.getElementById('footer-privacy').addEventListener('click', function () { showDoc('privacy'); });
+        document.getElementById('footer-rules').addEventListener('click', function () { showDoc('rules'); });
         document.getElementById('close-modal-btn').addEventListener('click', hideDoc);
-        document.getElementById('doc-modal').addEventListener('click', function(e) {
+        document.getElementById('doc-modal').addEventListener('click', function (e) {
             if (e.target === this) hideDoc();
         });
     </script>
 </body>
 
 </html>
+
 
 

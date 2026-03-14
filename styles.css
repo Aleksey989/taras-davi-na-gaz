@@ -77,6 +77,8 @@ body::before {
     font-size: 36px;
 }
 
+
+
 .logo-text {
     font-family: 'Unbounded', sans-serif;
     font-size: 50px;
@@ -623,15 +625,16 @@ body::before {
         height: 180px;
     }
     .order-card {
-        padding: 15px;
+        padding: 15px 6px;
     }
     .success-card {
         padding: 40px 24px;
     }
     .logo-text {
         font-family: 'Unbounded', sans-serif;
-        font-size: 26px;
+        font-size: 24px;
     }
+    
     .footer-logo {
         font-size: 22px;
     }
@@ -661,3 +664,4 @@ body::before {
         font-size: 16px;
     }
 }
+
